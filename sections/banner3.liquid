@@ -1,0 +1,1028 @@
+{%- liquid
+  assign sid = section.id
+  assign rtl = settings.use_rtl
+  if rtl 
+    assign ltr = false 
+  else 
+    assign ltr = true  
+  endif
+  assign index = 1
+  assign se_blocks = section.blocks
+  assign arr_blocks_img = se_blocks | where: "type", 'image' -%}
+  
+<div class="nt_se_{{sid}} type_css_btna {{section.settings.layout}}">
+  {%- render 'section_title' -%}
+  <div class="mt__30 nt_banner_holder row fl_center js_packery hoverz_{{section.settings.hoverz}} cat_space_{{section.settings.cat_space}}" data-packery='{ "itemSelector": ".cat_space_item","gutter": 0,"percentPosition": true,"originLeft": {{ltr}} }'> 
+    <div class="grid-sizer"></div>
+    {%- for block in arr_blocks_img -%}{%- assign image = block.settings.image -%}
+      <div class="cat_space_item col-lg-{{block.settings.col_pr}} col-md-{{block.settings.col_pr_tb}} col-{{block.settings.col_pr_mb}} pr_animated done" id="bk_{{block.id}}">
+        <div class="banner_hzoom nt_promotion oh pr">
+          {%- if image != blank %}{% assign image_mb = block.settings.image_mb |default:image -%}
+            <div class="dek_img_slide nt_bg_lz pr_lazy_img lazyload item__position {{block.settings.img_align}}" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" data-parent-fit="cover"></div>
+            <div class="mb_img_slide nt_bg_lz pr_lazy_img lazyload item__position {{block.settings.img_align}}" data-bgset="{{ image_mb | img_url: '1x1' }}" data-ratio="{{image_mb.aspect_ratio}}" data-sizes="auto" data-parent-fit="cover"></div>
+          {%- else -%}
+            {%- capture cl -%}{% cycle 'a8dacc', '56cfe1' %}{%- endcapture -%}
+            <div class="nt_bg_lz pr_lazy_img lazyload item__position {{block.settings.img_align}}" data-bg="https://placehold.it/530x600.png/{{cl}}/{{cl}}?text=1" style="padding-top:52.63157894736842%"></div>
+          {%- endif -%}
+          <a href="{{ block.settings.url }}" target="{{block.settings.open_link}}" class="pa t__0 l__0 r__0 b__0{% if block.settings.url == blank %} pe_none{% endif %}"></a>
+          <div class="nt_promotion_html pa t__0 l__0 {{block.settings.txt_align}} {{block.settings.txt_align_mb}} pe_none z_100">
+              {%- for block in se_blocks offset:index -%}{%- assign index = index|plus:1 -%}
+                 {%- case block.type -%}
+                    {%- when 'hd' -%}
+                       <h3 id="b_{{block.id}}" class="slt4_h3 lh__1 mg__0" {{ block.shopify_attributes }}>{{block.settings.title}}</h3>
+                    {%- when 'subhd' -%}
+                       <h4 id="b_{{block.id}}" class="slt4_h4 mg__0 lh__1 {{block.settings.font}}{% if block.settings.hide %} dn db_md{% endif %}" {{ block.shopify_attributes }}>{{block.settings.title}}</h4>
+                    {%- when 'txt' -%}
+                       <p id="b_{{block.id}}" class="slt4_p mg__0{% if block.settings.hide %} dn db_md{% endif %}" {{ block.shopify_attributes }}>{{block.settings.title}}</p> 
+                    {%- when 'btn' -%}
+                       {%- if block.settings.btn_link != blank and block.settings.title != blank -%}<a id="b_{{block.id}}" class="slt4_btn button pe_auto round_{{block.settings.btn_round}} btn_icon_{{block.settings.btn_icon}}" href="{{block.settings.btn_link}}" target="{{open_link}}" {{ block.shopify_attributes }}>{{block.settings.title}}</a>{%- endif -%}
+                       {%- if block.settings.btn_link2 != blank and block.settings.title2 != blank -%}<a id="b_{{block.id}}" class="slt4_btn button pe_auto btn_style_{{block.settings.btn_style}} round_{{block.settings.btn_round}} btn_icon_{{block.settings.btn_icon}}" href="{{block.settings.btn_link2}}" target="{{open_link}}" {{ block.shopify_attributes }}>{{block.settings.title2}}</a>{%- endif -%}
+                    {%- when 'html' -%}
+                       <div id="b_{{block.id}}" class="slt4_html" {{ block.shopify_attributes }}>{{block.settings.html}}</div>
+                    {%- when 'space' -%}
+                       <div id="b_{{block.id}}" class="slt4_space" {{ block.shopify_attributes }}></div>
+                    {%- else -%}{%- break -%}
+                 {%- endcase -%}
+              {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{%- render 'section_css' -%}
+{%- style -%}
+    {%- for block in section.blocks %}{% assign bid = block.id %}{% assign btype = block.type -%}
+    {%- if btype == 'image' -%}
+      {%- assign image = block.settings.image %}{% assign image_mb = block.settings.image_mb |default:image -%}
+       #bk_{{bid}} .nt_promotion>a:after{ background-color: {{block.settings.cl_overlay}};opacity: {{block.settings.cl_opacity | divided_by: 100.00}} }
+       #bk_{{bid}} .nt_promotion_html {
+         {%- assign cap_h_pos = block.settings.cap_h_pos_mb -%}
+         {%- assign cap_v_pos = block.settings.cap_v_pos_mb -%}
+         top:{{cap_v_pos}}%;
+         {%- if cap_v_pos == 50 and cap_h_pos == 50 -%}width:100%;{%- endif -%}
+         {%- if cap_h_pos > 50 -%}
+          right:{{100|minus:cap_h_pos}}%;transform: translate({{100|minus:cap_h_pos}}%, -{{cap_v_pos}}%);
+         {%- else -%}
+          left:{{cap_h_pos}}%;transform: translate(-{{cap_h_pos}}%, -{{cap_v_pos}}%);
+         {%- endif -%}
+       }
+       {%- if image != blank %}#bk_{{bid}} .mb_img_slide.nt_bg_lz {padding-top:{{ 1 | divided_by: image_mb.aspect_ratio | times: 100}}%;}{% endif -%}
+       @media (min-width: 768px) {
+          #bk_{{bid}} .nt_promotion_html {
+            {%- assign cap_h_pos = block.settings.cap_h_pos -%}
+            {%- assign cap_v_pos = block.settings.cap_v_pos -%}
+            top:{{cap_v_pos}}%;
+            {%- if cap_v_pos == 50 and cap_h_pos == 50 -%}width:100%;{%- else -%}width:auto;{%- endif -%}
+            {%- if cap_h_pos > 50 -%}
+             right:{{100|minus:cap_h_pos}}%;transform: translate({{100|minus:cap_h_pos}}%, -{{cap_v_pos}}%);left:auto;
+            {%- else -%}
+             left:{{cap_h_pos}}%;transform: translate(-{{cap_h_pos}}%, -{{cap_v_pos}}%);right:auto;
+            {%- endif -%}
+          }
+          {%- if image != blank %}#bk_{{bid}} .dek_img_slide.nt_bg_lz {padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;}{% endif -%}
+       }
+
+    {%- elsif btype == 'html' %}{% continue -%}
+    {%- elsif btype == 'btn' -%}
+      #b_{{bid}}{ {% if block.settings.ls_mb_text != 0 %}letter-spacing:{{block.settings.ls_mb_text}}px;{% endif %}min-height:{{block.settings.h_mb}}px;font-size: {{block.settings.fs_mb_text}}px;color: {{block.settings.cl_txt}};background-color: {{block.settings.cl_bg}};border-color: {{block.settings.cl_bd}} }#b_{{bid}}.btn_icon_true:after {color: {{block.settings.cl_txt}} }@media (min-width: 768px) {#b_{{bid}} { {% if block.settings.ls_text != 0 %}letter-spacing:{{block.settings.ls_text}}px;{% endif %}font-weight: {{block.settings.fw_text}};min-height:{{block.settings.h}}px;font-size: {{block.settings.fs_text}}px }}
+    {%- elsif btype == 'space' -%}
+      #b_{{bid}} {height: {{block.settings.sp_mb}}px}@media (min-width: 768px) {#b_{{bid}} { height:{{block.settings.sp}}px} }
+    {%- else -%}
+      #b_{{bid}} { {% if block.settings.ls_mb_text != 0 %}letter-spacing:{{block.settings.ls_mb_text}}px;{% endif %}{% if block.settings.lh_mb_text != 0 %}line-height:{{block.settings.lh_mb_text}}px;{% endif %}font-size: {{block.settings.fs_mb_text}}px;font-weight: {{block.settings.fw_text}};color: {{block.settings.color}} }@media (min-width: 768px) {#b_{{bid}} { {% if block.settings.ls_text != 0 %}letter-spacing:{{block.settings.ls_text}}px;{% endif %}{% if block.settings.lh_text != 0 %}line-height: {{block.settings.lh_text}}px;{% endif %}font-size: {{block.settings.fs_text}}px}}
+    {%- endif -%}
+    {%- endfor -%}
+{%- endstyle -%}
+
+
+{%- schema -%}
+  {
+    "name": "Banner Custom 2",
+    "class": "nt_section type_banner3 type_packery",
+    "max_blocks": 30,
+    "settings": [
+      {
+        "type": "header",
+        "content": "== Title Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_title",
+        "label": "Sub Text"
+      },
+      {
+        "type": "select",
+        "id": "sub_font",
+        "default": "2",
+        "options": [
+         {
+            "value": "1",
+            "label": "Body font"
+         },
+         {
+            "value": "2",
+            "label": "Sub title font"
+          }
+        ],
+        "label": "Sub Text use font:"
+      },
+      {
+        "type": "select",
+        "id": "style_title",
+        "options": [
+         {
+            "value": "title_1",
+            "label": "Style 1"
+         },
+         {
+            "value": "title_2",
+            "label": "Style 2"
+          },
+         {
+            "value": "title_3",
+            "label": "Style 3"
+          },
+         {
+            "value": "title_4",
+            "label": "Style 4"
+          },
+         {
+            "value": "title_5 lazyload",
+            "label": "Style 5"
+          },
+         {
+            "value": "title_6",
+            "label": "Style 6"
+          },
+         {
+            "value": "title_7 +la",
+            "label": "Style 7 (with line-awesome)"
+          }
+        ],
+        "label": "Style title"
+      },
+      {
+        "type": "text",
+        "id": "ic_tt",
+        "label": "Style 7 icon line-awesome",
+        "default": "gem"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_clpr",
+        "label": "Use icon color primary?",
+        "default": false
+      },
+      {
+        "type": "paragraph",
+        "content": "[Get icons Line awesome](https://icons8.com/line-awesome)"
+      },
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+     {
+       "type": "select",
+       "id": "cat_space",
+       "options": [
+        {
+           "value": "30",
+           "label": "30"
+         },
+         {
+           "value": "20",
+           "label": "20"
+         },
+         {
+           "value": "10",
+           "label": "10"
+         },
+         {
+           "value": "6",
+           "label": "6"
+         },
+         {
+           "value": "2",
+           "label": "2"
+         },
+         {
+           "value": "0",
+           "label": "0"
+         }
+       ],
+       "label": "Space between Banners",
+       "default": "30"
+     },
+      {
+        "type": "checkbox",
+        "id": "hoverz",
+        "label": "Enable zoom image on hover?",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "nt_full",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color"
+      },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank",
+        "default": "50px,,50px,",
+        "placeholder": "50px,,50px,"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank",
+        "placeholder": "50px,,50px,"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin",
+        "placeholder": "50px,,50px,"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding",
+        "placeholder": "50px,,50px,"
+      }
+    ],
+    "blocks": [
+      {
+      "type": "image",
+      "name": "Image (Parent)",
+      "settings": [
+        {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         },
+        {
+           "type": "image_picker",
+           "id": "image_mb",
+           "label": "Mobile image (optional)"
+         },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link image",
+          "info": "The whole image becomes clickable."
+        },
+        {
+          "type": "select",
+          "id": "open_link",
+          "options": [
+            {
+              "value": "_self",
+              "label": "Current window (_self)"
+            },
+           {
+              "value": "_blank",
+              "label": "New window (_blank)"
+            }
+          ],
+          "label": "Open link in",
+          "default": "_blank"
+        },
+        {
+          "type": "select",
+          "id": "col_pr",
+          "label": "Banner width (desktop)",
+          "default": "6",
+          "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "8",
+              "label": "66,6%"
+            },
+            {
+              "value": "7",
+              "label": "58,3%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "5",
+              "label": "41,6%"
+            },
+            {
+              "value": "4",
+              "label": "33,3%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "15",
+              "label": "20%"
+            },
+            {
+              "value": "2",
+              "label": "16,6%"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "col_pr_tb",
+          "label": "Banner width (tablet)",
+          "default": "6",
+          "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "8",
+              "label": "66,6%"
+            },
+            {
+              "value": "7",
+              "label": "58,3%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "5",
+              "label": "41,6%"
+            },
+            {
+              "value": "4",
+              "label": "33,3%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "15",
+              "label": "20%"
+            },
+            {
+              "value": "2",
+              "label": "16,6%"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "col_pr_mb",
+          "label": "Banner width (mobile)",
+          "default": "12",
+          "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            }
+          ]
+        },
+        {
+           "type": "header",
+           "content": "== Content settings"
+         },
+        {
+           "type": "range",
+           "id": "cap_v_pos",
+           "label": "Content vertical position",
+           "default": 50,
+           "min": 0,
+           "max": 100,
+           "step": 1,
+           "unit": "%"
+        },
+        {
+           "type": "range",
+           "id": "cap_h_pos",
+           "label": "Content horizontal position",
+           "default": 50,
+           "min": 0,
+           "max": 100,
+           "step": 1,
+           "unit": "%"
+        },
+        {
+          "type": "select",
+          "id": "txt_align",
+          "label": "Text alignment",
+          "default": "tc_md",
+          "options": [
+            {
+              "value": "tl_md",
+              "label": "Left"
+            },
+            {
+              "value": "tc_md",
+              "label": "Center"
+            },
+            {
+              "value": "tr_md",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+           "type": "header",
+           "content": "== Content mobile settings"
+         },
+        {
+           "type": "range",
+           "id": "cap_v_pos_mb",
+           "label": "Content vertical position",
+           "default": 50,
+           "min": 0,
+           "max": 100,
+           "step": 1,
+           "unit": "%"
+        },
+        {
+           "type": "range",
+           "id": "cap_h_pos_mb",
+           "label": "Content horizontal position",
+           "default": 50,
+           "min": 0,
+           "max": 100,
+           "step": 1,
+           "unit": "%"
+        },
+        {
+          "type": "select",
+          "id": "txt_align_mb",
+          "label": "Text alignment",
+          "default": "tc",
+          "options": [
+            {
+              "value": "tl",
+              "label": "Left"
+            },
+            {
+              "value": "tc",
+              "label": "Center"
+            },
+            {
+              "value": "tr",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "== Color"
+        },
+        {
+          "type": "color",
+          "id": "cl_overlay",
+          "label": "Overlay",
+          "default": "#000"
+        },
+        {
+          "type": "range",
+          "id": "cl_opacity",
+          "label": "Overlay opacity",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%"
+        }
+        ]
+      },
+      {
+        "type": "hd",
+        "name": "Heading",
+        "settings": [
+            {
+              "type": "textarea",
+              "id": "title",
+              "label": "Heading",
+              "default": "Heading Banner"
+            },
+            {
+              "type": "color",
+              "id": "color",
+              "label": "Color Text",
+              "default": "#fff"
+            },
+            {
+              "type": "range",
+              "id": "fw_text",
+              "min": 400,
+              "max": 800,
+              "step": 100,
+              "label": "Font weight",
+              "default": 600
+            },
+            {
+              "type": "range",
+              "id": "fs_text",
+              "min": 20,
+              "max": 70,
+              "step": 0.5,
+              "label": "Font size",
+              "unit": "px",
+              "default": 30
+            },
+            {
+              "type": "range",
+              "id": "lh_text",
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "label": "Line Height",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "ls_text",
+              "min": 0,
+              "max": 10,
+              "step": 0.1,
+              "label": "Letter spacing",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "fs_mb_text",
+              "min": 10,
+              "max": 50,
+              "step": 0.5,
+              "label": "Font size (mobile)",
+              "unit": "px",
+              "default": 15
+            },
+            {
+              "type": "range",
+              "id": "lh_mb_text",
+              "min": 0,
+              "max": 50,
+              "step": 0.5,
+              "label": "Line Height (mobile)",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "ls_mb_text",
+              "min": 0,
+              "max": 10,
+              "step": 0.1,
+              "label": "Letter spacing",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+      },
+      {
+        "type": "subhd",
+        "name": "Sub Heading",
+        "settings": [
+            {
+              "type": "select",
+              "id": "font",
+              "default": "f__libre",
+              "options": [
+               {
+                  "value": "f_body",
+                  "label": "Body font"
+               },
+               {
+                  "value": "f_heading",
+                  "label": "Heading font"
+               },
+               {
+                  "value": "f__libre",
+                  "label": "Sub title font"
+                }
+              ],
+              "label": "Sub Heading use font:"
+            },
+            {
+              "type": "textarea",
+              "id": "title",
+              "label": "Heading",
+              "default": "Sub banner"
+            },
+            {
+              "type": "color",
+              "id": "color",
+              "label": "Color Text",
+              "default": "#fff"
+            },
+            {
+              "type": "range",
+              "id": "fw_text",
+              "min": 400,
+              "max": 800,
+              "step": 100,
+              "label": "Font weight",
+              "default": 400
+            },
+            {
+              "type": "range",
+              "id": "fs_text",
+              "min": 10,
+              "max": 50,
+              "step": 0.5,
+              "label": "Font size",
+              "unit": "px",
+              "default": 14
+            },
+            {
+              "type": "range",
+              "id": "lh_text",
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "label": "Line Height",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "ls_text",
+              "min": 0,
+              "max": 10,
+              "step": 0.1,
+              "label": "Letter spacing",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "fs_mb_text",
+              "min": 10,
+              "max": 50,
+              "step": 0.5,
+              "label": "Font size (mobile)",
+              "unit": "px",
+              "default": 14
+            },
+            {
+              "type": "range",
+              "id": "lh_mb_text",
+              "min": 0,
+              "max": 50,
+              "step": 0.5,
+              "label": "Line Height (mobile)",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "ls_mb_text",
+              "min": 0,
+              "max": 10,
+              "step": 0.1,
+              "label": "Letter spacing",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "checkbox",
+              "id": "hide",
+              "label": "Hidden on mobile?",
+              "default": false
+            }
+          ]
+      },
+      {
+        "type": "txt",
+        "name": "Content",
+        "settings": [
+            {
+              "type": "textarea",
+              "id": "title",
+              "label": "Content"
+            },
+            {
+              "type": "color",
+              "id": "color",
+              "label": "Color Text",
+              "default": "#fff"
+            },
+            {
+              "type": "range",
+              "id": "fw_text",
+              "min": 400,
+              "max": 800,
+              "step": 100,
+              "label": "Font weight",
+              "default": 400
+            },
+            {
+              "type": "range",
+              "id": "fs_text",
+              "min": 10,
+              "max": 50,
+              "step": 0.5,
+              "label": "Font size",
+              "unit": "px",
+              "default": 14
+            },
+            {
+              "type": "range",
+              "id": "lh_text",
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "label": "Line Height",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "ls_text",
+              "min": 0,
+              "max": 10,
+              "step": 0.1,
+              "label": "Letter spacing",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "fs_mb_text",
+              "min": 10,
+              "max": 50,
+              "step": 0.5,
+              "label": "Font size (mobile)",
+              "unit": "px",
+              "default": 14
+            },
+            {
+              "type": "range",
+              "id": "lh_mb_text",
+              "min": 0,
+              "max": 50,
+              "step": 0.5,
+              "label": "Line Height (mobile)",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "ls_mb_text",
+              "min": 0,
+              "max": 10,
+              "step": 0.1,
+              "label": "Letter spacing",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "checkbox",
+              "id": "hide",
+              "label": "Hidden on mobile?",
+              "default": false
+            }
+          ]
+      },
+      {
+        "type": "btn",
+        "name": "Button",
+        "settings": [
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Button label",
+              "default": "Shop Now"
+            },
+            {
+              "type": "url",
+              "id": "btn_link",
+              "label": "Button link (Optional)"
+            },
+            {
+              "type": "text",
+              "id": "title2",
+              "label": "Button label 2",
+              "default": "Shop Now"
+            },
+            {
+              "type": "url",
+              "id": "btn_link2",
+              "label": "Button link 2 (Optional)"
+            },
+            {
+              "type": "checkbox",
+              "id": "btn_round",
+              "label": "Button round?",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "btn_icon",
+              "label": "Button icon?",
+              "default": false
+            },
+            {
+              "type": "color",
+              "id": "cl_txt",
+              "label": "Text color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "cl_bg",
+              "label": "Background color",
+              "default": "#222"
+            },
+            {
+              "type": "color",
+              "id": "cl_bd",
+              "label": "Border color",
+              "default": "#222"
+            },
+            {
+              "type": "range",
+              "id": "fs_text",
+              "min": 10,
+              "max": 40,
+              "step": 0.5,
+              "label": "Font size",
+              "unit": "px",
+              "default": 14
+            },
+            {
+              "type": "range",
+              "id": "fw_text",
+              "min": 400,
+              "max": 600,
+              "step": 100,
+              "label": "Font weight",
+              "default": 600
+            },
+            { 
+              "type": "range",
+              "id": "h",
+              "min": 40,
+              "max": 80,
+              "step": 0.5,
+              "label": "Min height button",
+              "unit": "px",
+              "default": 40
+            },
+            {
+              "type": "range",
+              "id": "ls_text",
+              "min": 0,
+              "max": 10,
+              "step": 0.1,
+              "label": "Letter spacing",
+              "info": "set is '0' use to default",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "fs_mb_text",
+              "min": 10,
+              "max": 50,
+              "step": 0.5,
+              "label": "Font size (mobile)",
+              "unit": "px",
+              "default": 14
+            },
+            { 
+              "type": "range",
+              "id": "h_mb",
+              "min": 40,
+              "max": 80,
+              "step": 0.5,
+              "label": "Min height button (mobile)",
+              "unit": "px",
+              "default": 40
+            },
+            {
+              "type": "range",
+              "id": "ls_mb_text",
+              "min": 0,
+              "max": 10,
+              "step": 0.1,
+              "label": "Letter spacing",
+              "info": "set is '0' use to default (mobile)",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+      },
+      {
+        "type": "html",
+        "name": "HTML",
+        "settings": [
+            {
+              "type": "html",
+              "id": "html",
+              "label": "Custom HTMl",
+              "default": "<h3>Best shopify theme 2020<\/h3>"
+            }
+          ]
+      },
+      {
+        "type": "space",
+        "name": "Space between",
+        "settings": [
+            {
+              "type": "range",
+              "id": "sp",
+              "min": 5,
+              "max": 105,
+              "step": 1,
+              "label": "Space",
+              "unit": "px",
+              "default": 20
+            },
+            {
+              "type": "range",
+              "id": "sp_mb",
+              "min": 0,
+              "max": 50,
+              "step": 0.5,
+              "label": "Space (mobile)",
+              "unit": "px",
+              "default": 10
+            }
+          ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "9. Banner Custom 2",
+        "category": "III. Image",
+        "blocks": [
+          { "type": "image" },
+          { "type": "hd" },
+          { "type": "space" },
+          { "type": "subhd" },
+          { "type": "space" },
+          { "type": "btn" },
+          { "type": "image" },
+          { "type": "hd" },
+          { "type": "space" },
+          { "type": "subhd" },
+          { "type": "space" },
+          { "type": "btn" }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,19 @@
+
+<!-- Zegsu Reviews App -->
+<link rel="stylesheet" class="zegsu-review-review-css" href="https://zegsu.com/dist/css/reviews/reviews.css?version=2">
+<link rel="stylesheet" class="zegsu-review-grid-css" href="https://zegsu.com/dist/css/reviews/grid.css?version=2">
+{% if product_id == nil or product_id == ""%}
+{% if custom_product == nil %}
+<div class="zegsu-reviews" data-token="1692822550" data-shop="melhor-que-a-encomenda.myshopify.com" data-zegsu-review-product-id="{{product.id}}"></div>
+<script class="zegsu-review-snippet-js">var zegsu_rich_snippet_{{product.id}} = { "@context": "http://schema.org/", "@type": "Product", "name": {{ product.title | json }}, "url": {{ shop.url | append: product.url | json }}, {%- if product.featured_media -%} {%- assign media_size = product.featured_media.preview_image.width | append: "x" -%} "image": [ {{ product.featured_media | img_url: media_size | prepend: "https:" | json }} ], {%- endif -%} "description": {{ product.description | strip_html | json }}, "brand": { "@type": "Thing", "name": {{ product.vendor | json }} }, "offers": [ {%- for variant in product.variants -%} { "@type" : "Offer", {%- if variant.sku != blank -%} "sku": {{ variant.sku | json }}, {%- endif -%} "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}", "price" : {{ variant.price | divided_by: 100.00 | json }}, "priceCurrency" : {{ cart.currency.iso_code | json }}, "url" : {{ shop.url | append: variant.url | json }} }{% unless forloop.last %},{% endunless %} {%- endfor -%} ] }</script>
+<script class="zegsu-review-widget-js" async defer src="https://zegsu.com/dist/js/reviews/review-widget.js"></script>
+<script class="zegsu-review-js" async defer src="https://zegsu.com/shopify/reviews/shop-reviews?token=1692822550&shop=melhor-que-a-encomenda.myshopify.com&productId={{product.id}}&page=1"></script>
+{% else %}
+<div class="zegsu-reviews" data-token="1692822550" data-shop="melhor-que-a-encomenda.myshopify.com" data-zegsu-review-product-id="{{custom_product.id}}"></div>
+<script class="zegsu-review-snippet-js">var zegsu_rich_snippet_{{custom_product.id}} = { "@context": "http://schema.org/", "@type": "Product", "name": {{ custom_product.title | json }}, "url": {{ shop.url | append: custom_product.url | json }}, {%- if custom_product.featured_media -%} {%- assign media_size = custom_product.featured_media.preview_image.width | append: "x" -%} "image": [ {{ custom_product.featured_media | img_url: media_size | prepend: "https:" | json }} ], {%- endif -%} "description": {{ custom_product.description | strip_html | json }}, "brand": { "@type": "Thing", "name": {{ custom_product.vendor | json }} }, "offers": [ {%- for variant in custom_product.variants -%} { "@type" : "Offer", {%- if variant.sku != blank -%} "sku": {{ variant.sku | json }}, {%- endif -%} "availability" : "http://schema.org/{% if custom_product.available %}InStock{% else %}OutOfStock{% endif %}", "price" : {{ variant.price | divided_by: 100.00 | json }}, "priceCurrency" : {{ cart.currency.iso_code | json }}, "url" : {{ shop.url | append: variant.url | json }} }{% unless forloop.last %},{% endunless %} {%- endfor -%} ] }</script>
+<script class="zegsu-review-widget-js" async defer src="https://zegsu.com/dist/js/reviews/review-widget.js"></script>
+<script class="zegsu-review-js" async defer src="https://zegsu.com/shopify/reviews/shop-reviews?token=1692822550&shop=melhor-que-a-encomenda.myshopify.com&productId={{custom_product.id}}&page=1"></script>
+{% endif %}{% else %}
+<div class="zegsu-reviews" data-token="1692822550" data-shop="melhor-que-a-encomenda.myshopify.com" data-zegsu-review-product-id="{{product_id}}"></div>
+<script class="zegsu-review-js" async defer src="https://zegsu.com/shopify/reviews/shop-reviews?token=1692822550&shop=melhor-que-a-encomenda.myshopify.com&productId={{product_id}}&page=1"></script>
+{% endif %}

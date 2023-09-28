@@ -1,0 +1,482 @@
+<div class="boxParcelas" style="border: 1px solid #dadada; padding: 5px; background-color: #fff; margin-top: 15px; margin-bottom: 15px;border-radius: 10px;">
+  <div id="clicktrigger" style="margin:0; cursor: pointer; border-bottom: 1px solid #dadada; padding: 5px 5px;">
+    <div class="row" style="margin: 0">
+      <div class="foo">
+        <img data-img="visa" src="https://parcelamento.empreender.com.br/bandeiras_parcelamento/visa.svg" class="cartoes">
+        <img data-img="master" src="https://parcelamento.empreender.com.br/bandeiras_parcelamento/master.svg" class="cartoes">
+        <img data-img="american_express" src="https://parcelamento.empreender.com.br/bandeiras_parcelamento/amex.svg" class="cartoes">
+        <img data-img="cielo" src="https://parcelamento.empreender.com.br/bandeiras_parcelamento/celo.svg" class="cartoes">
+        <img data-img="hiper_card" src="https://parcelamento.empreender.com.br/bandeiras_parcelamento/hipercard.svg" class="cartoes">
+        <img class="cartoes d-none d-sm-inline-block" src="https://parcelamento.empreender.com.br/bandeiras_parcelamento/dinners.svg">
+      </div>
+      <div class="bar">
+        <span class="hideOnMobile">Parcelas</span>
+        <span style="margin-left: 12px;">
+          <span class="iconeBt">▾</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  {% if settings.appmax %}
+<div class="boxparcela">
+  <div class="linhas">
+    <p class="vezes">1x</p>
+    <p class="parcelas" val="1" juros="1">de {{ product.selected_or_first_available_variant.price | money }}</p>
+    <p class="juros">Sem Juros</p>
+    <p class="total">total {{ product.selected_or_first_available_variant.price | money }}</p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">2x</p>
+    <p class="parcelas" val="2" juros="1.0451"></p>
+    <p class="juros">Sem Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">3x</p>
+    <p class="parcelas" val="3" juros="1.0604"></p>
+    <p class="juros">Sem Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">4x</p>
+    <p class="parcelas" val="4" juros="1.0759"></p>
+    <p class="juros">Sem Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">5x</p>
+    <p class="parcelas" val="5" juros="1.0915"></p>
+    <p class="juros">Sem Juros</p>
+    <p class="total"></p>
+  </div>
+
+  {% comment %}
+  <div class="linhas">
+    <p class="vezes">6x</p>
+    <p class="parcelas" val="6" juros="1.1072"></p>
+    <p class="juros">Sem Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">7x</p>
+    <p class="parcelas" val="7" juros="1.1231"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">8x</p>
+    <p class="parcelas" val="8" juros="1.1392"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">9x</p>
+    <p class="parcelas" val="9" juros="1.1554"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">10x</p>
+    <p class="parcelas" val="10" juros="1.1717"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">11x</p>
+    <p class="parcelas" val="11" juros="1.1882"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">12x</p>
+    <p class="parcelas" val="12" juros="1.2048"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>  
+    {% endcomment %}
+</div>
+  {% elsif settings.cartpanda %}
+  <div class="boxparcela">
+    <div class="linhas">
+      <p class="vezes">1x</p>
+      <p class="parcelas" val="1" juros="1">de {{ product.selected_or_first_available_variant.price | money }}</p>
+      <p class="juros">Sem Juros</p>
+      <p class="total">total {{ product.selected_or_first_available_variant.price | money }}</p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">2x</p>
+      <p class="parcelas" val="2" juros="1.0676"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">3x</p>
+      <p class="parcelas" val="3" juros="1.0844"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">4x</p>
+      <p class="parcelas" val="4" juros="1.1023"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">5x</p>
+      <p class="parcelas" val="5" juros="1.1193"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">6x</p>
+      <p class="parcelas" val="6" juros="1.1358"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">7x</p>
+      <p class="parcelas" val="7" juros="1.1501"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">8x</p>
+      <p class="parcelas" val="8" juros="1.1690"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">9x</p>
+      <p class="parcelas" val="9" juros="1.1886"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">10x</p>
+      <p class="parcelas" val="10" juros="1.2007"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">11x</p>
+      <p class="parcelas" val="11" juros="1.2192"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>
+    
+    <div class="linhas">
+      <p class="vezes">12x</p>
+      <p class="parcelas" val="12" juros="1.2375"></p>
+      <p class="juros">Com Juros</p>
+      <p class="total"></p>
+    </div>  
+  </div>
+  {% elsif settings.personalizado %}
+<div class="boxparcela">
+  <div class="linhas">
+    <p class="vezes">1x</p>
+    <p class="parcelas" val="1" juros="1">de {{ product.selected_or_first_available_variant.price | money }}</p>
+    <p class="juros">sem Juros</p>
+    <p class="total">total {{ product.selected_or_first_available_variant.price | money }}</p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">2x</p>
+    <p class="parcelas" val="2" juros="1.{{ settings.parceladois }}"></p>
+    <p class="juros">sem Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">3x</p>
+    <p class="parcelas" val="3" juros="1.{{ settings.parcelatres }}"></p>
+    <p class="juros">sem Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">4x</p>
+    <p class="parcelas" val="4" juros="1.{{ settings.parcelaquatro }}"></p>
+    <p class="juros">sem Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">5x</p>
+    <p class="parcelas" val="5" juros="1.{{ settings.parcelacinco }}"></p>
+    <p class="juros">sem Juros</p>
+    <p class="total"></p>
+  </div>
+  
+    
+  <div class="linhas">
+    <p class="vezes">6x</p>
+    <p class="parcelas" val="6" juros="1.{{ settings.parcelaseis }}"></p>
+    <p class="juros">Sem Juros</p>
+    <p class="total"></p>
+  </div>
+  {% comment %}
+  <div class="linhas">
+    <p class="vezes">7x</p>
+    <p class="parcelas" val="7" juros="1.{{ settings.parcelaseis }}"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">8x</p>
+    <p class="parcelas" val="8" juros="1.1392"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">9x</p>
+    <p class="parcelas" val="9" juros="1.1554"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">10x</p>
+    <p class="parcelas" val="10" juros="1.1717"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">11x</p>
+    <p class="parcelas" val="11" juros="1.1882"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>
+  
+  <div class="linhas">
+    <p class="vezes">12x</p>
+    <p class="parcelas" val="12" juros="1.2048"></p>
+    <p class="juros">Com Juros</p>
+    <p class="total"></p>
+  </div>  
+    {% endcomment %}
+</div>
+  {% endif %}
+  <div style="margin: 0px; display: block;  border-top: 1px solid #dadada; padding: 5px;">
+    <div class="row" stylew="margin: 0">
+      <div style="padding:0; width: 75%; text-align: left; text-decoration: none;">
+        <img class="cartoes boleto" src="https://cdn.shopify.com/s/assets/payment_icons/boleto-50666ca3aee193c64e41a2803fe4a6d6c5e1a27d03c5e44ce97e3aa82fb6deb2.svg">
+        <img class="cartoes pix" src="//cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/pix-8aaec3ba7de27788eeca20f0c2329994ff27f055bd6219dea1a0138f95cad517.svg">
+      </div>
+      <div style="padding:0; width: 25%; text-align: right; padding-top: 3px;">
+        <span class="price">{{ product.selected_or_first_available_variant.price | money }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+function parcelamento(){
+	$(".linhas").each(function() {
+      if($('.price_range ins').length > 0){
+        var preco = $('.price_range ins').text().replace("R$ ", "").replace(',', '.')  
+      }else{
+        var preco = $('span.price_varies.current_price').text().replace("R$ ", "").replace(',', '.')
+      }      
+      var juros = $(this).find(".parcelas").attr('juros')
+      var vezes = $(this).find(".parcelas").attr('val')
+      var calculo = ((preco) * juros) / vezes;
+      $(this).find('.parcelas').text('de R$ ' + calculo.toFixed(2).replace('.', ','))
+      var total = calculo * vezes
+      $(this).find('.total').text('total R$ ' + total.toFixed(2).replace('.', ','))
+	});    
+}
+  
+  parcelamento()
+  
+  $(document).ready(function() {   
+    
+    $(".swatch_pr_item").click(function() {
+      setTimeout(function(){ parcelamento() }, 500);
+    });
+  });
+  
+   setTimeout(function waitJquery() {
+    if (window.jQuery) {
+      $( document ).ready(function() {
+        $( "#clicktrigger" ).click(function() {
+          $( ".boxparcela" ).slideToggle("slow");
+        });
+        $(".boxTot").hide();
+      });
+    } else {
+      setTimeout(waitJquery, 100);
+    }
+  }, 100);
+</script>
+
+
+ 
+
+<style>
+  .boxparcela{
+  	display: none;
+  }
+  
+  .linhas{
+  	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+  }
+  
+  .linhas:nth-child(even) {
+    background: #dcdcdc;
+}
+  
+  .linhas p{
+  	margin-bottom: 0;
+  }
+  
+  .openparcela{
+  	color: #8c1555;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+</style>
+
+<style>
+  .boxParcelas .row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    width: 100% !important;
+    font-size: 0.9em!important;
+  }
+
+  .boxParcelas img.cartoes {
+    height: 21px;
+    padding: 0 4px;
+    margin: 3px 0;
+  }
+
+  .boxParcelas img {
+    max-height: 2.4rem;
+  }
+
+  @media screen and (max-width: 996px) {
+    .boxParcelas .hideOnMobile {
+      display: none;
+    }
+  }
+
+  .foo {
+    padding:0; 
+    width: 91%; 
+    text-align: left; 
+    text-decoration: none;
+  }
+
+  .bar {
+    padding:0; 
+    width: 8%; 
+    text-align: right; 
+    padding-top: 3px;
+    display: flex;
+  }
+
+  @media screen and (min-width: 576px) {
+    .d-sm-inline-block {
+      display: inline-block !important;
+    }
+
+    .boxParcelas img.cartoes {
+      height: 23px;
+    }
+
+    .foo {
+      width: 80%;
+    }
+
+    .bar {
+      padding:0; 
+      width: 20%; 
+      text-align: right; 
+      padding-top: 3px;
+    }
+  }
+
+  #boxJuros strong,
+  .boxParcelas .price {
+    color: #109533;
+    font-size: 19px;
+    margin-bottom: 0;
+  }
+
+  .calculoFrete {
+    
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calculoFrete .btCalc {
+
+    color: #fff;
+    background-color: #878787;
+    border-color: #878787;
+    width: 100%;
+  }
+
+  .calculoFrete .campoCep {
+
+    display: inline-block;
+    width: 100%;
+    height: 38px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+
+  .boxParcelas .boxJuros {
+
+    font-size: 0.9em;
+    padding: 15px;
+      display: none;
+  }
+
+  .boleto {
+    margin-left: 15px !important;
+  }
+  
+  .campoCep{
+  	border-radius: 10px!important;
+  }
+  p.parcelamento {
+    font-size: 18px;
+    color: #109533;
+    margin-bottom: 0;
+}
+</style>

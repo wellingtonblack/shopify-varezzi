@@ -1,0 +1,44 @@
+{{- 'pre_theme.min.css' | asset_url | stylesheet_tag -}}
+{% comment %} <link rel="preload" as="style" href="{{ 'pre_theme.min.css' | asset_url }}"> {% endcomment %}
+{% comment %} <link rel="preload" as="script" href="{{ 'lazysizes.min.js' | asset_url }} defer "> {% endcomment %}
+{% comment %} <link rel="preload" as="script" href="{{ 'nt_vendor.min.js' | asset_url }}"> {% endcomment %}
+<link rel="preload" href="{{ 'style.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'style.min.css' | asset_url }}" ></noscript>
+{{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+<link id="sett_clt4" rel="preload" href="{{ 'sett_cl.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+{%- if settings.custom_css %}<link rel="preload" as="style" href="{{ 'custom.scss.css' | asset_url }}">{{- 'custom.scss.css' | asset_url | stylesheet_tag -}}{% endif -%} 
+<link rel="preload" href="{{ 'line-awesome.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<script id="js_lzt4" src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
+<style>
+  .type_banner_collection .flickity-page-dots .dot, .type_slideshow .flickity-page-dots .dot {
+    width: 11px;
+    height: 11px;
+  }
+  @media screen and (min-width:1600px) and (max-width:1920px){ 
+    .bg_rp_norepeat{
+    min-height: 500px; 
+  }
+  }
+  @media screen and (min-width:1280px) and (max-width:1600px){ 
+    .bg_rp_norepeat{
+    min-height: 400px; 
+  }
+  }
+  @media screen and (min-width:950px) and (max-width:1280px){ 
+    .bg_rp_norepeat{
+    min-height: 300px; 
+  }
+  }
+    @media screen and (min-width:480px) and (max-width:768px){ 
+    .bg_rp_norepeat{
+    min-height: 500px; 
+  }
+  }
+  @media screen and (min-width:320px) and (max-width:480px){ 
+    .bg_rp_norepeat{
+    min-height: 400px; 
+  }
+  }
+      
+  </style>
+

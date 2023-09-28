@@ -1,0 +1,318 @@
+{%- comment %}when edit font, color, section on homepage{% endcomment -%}
+{%- comment %}
+<div id="t4_style_update_css" class="t4_tools_btns"><span class="ttip_nt tooltip_left">STYLE UPDATE<span class="tt_txt">Note: You must save before click "style update"</span>
+<svg version="1.1" class="t4_L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve"><path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50" transform="rotate(65.9135 50 50)"><animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite"></animateTransform></path></svg>
+</span></div>
+<div id="alet_css_t4">Style updated</div>
+{% endcomment -%}
+{%- if settings.enable_meta %}<a id="t4_meta_update" class="t4_tools_btns" href='{{routes.search_url}}?type=product&options%5Bunavailable_products%5D=last&options%5Bprefix%5D=last&q=*&view=meta_ntt4'><span class="ttip_nt tooltip_left">META EDITOR<span class="tt_txt">Store Metafield with your products</span></span></a>{% endif -%}
+{%- if settings.enable_tag -%}
+<div id="enable_tag" data-href="/cart/?view=t4-import-tags" class="t4_tools_btns"><span class="ttip_nt tooltip_left">AUTO TAGS<span class="tt_txt">Auto create product tags</span>
+<svg version="1.1" class="t4_L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve"><path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50" transform="rotate(65.9135 50 50)"><animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite"></animateTransform></path></svg>
+</span></div>
+{%- endif -%}
+<style>
+.t4_tools_btns {
+    position: fixed;
+    top: 60%;
+    right: 0;
+    z-index: 400;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    -webkit-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+}
+.t4_tools_btns.on_show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+}
+#t4_style_update_css {
+    display: none
+}
+/* .template-index #t4_style_update_css {
+    display: block
+} */
+#enable_tag {
+    margin-top: 100px;
+}
+.t4_tools_btns .ttip_nt {
+    text-align: center;
+    cursor: pointer;
+    height: 70px;
+    line-height: 1.2;
+    width: 80px;
+    background-color: #56cfe1;
+    -webkit-transition: transform .3s ease .4s, background-color .25s ease;
+    transition: transform .3s ease .4s, background-color .25s ease;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 800px;
+    -webkit-perspective: 800px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    border: 4px double #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);
+    background-color: #47c1bf;
+}
+svg.t4_L9 {
+    width: 80px;
+    height: 70px;
+    display: none
+}
+.t4_tools_btns .ttip_nt:hover {
+    background-color: #007e91;
+}
+.t4_tools_btns.up_loading {
+    pointer-events: none;
+}
+.t4_tools_btns.up_loading .ttip_nt {
+    font-size: 0;
+}
+.t4_tools_btns.up_loading .ttip_nt svg.t4_L9{
+   display: block
+}
+.t4_tools_btns .tooltip_left .tt_txt {
+    background-color: #fb8b8a;
+    padding: 12px 10px;
+}
+.rtl_false .t4_tools_btns .tooltip_left:before {
+    border-left-color: #fb8b8a;
+}
+.rtl_true .t4_tools_btns .tooltip_left:before {
+    border-right-color: #fb8b8a;
+}
+.rtl_true .t4_tools_btns {
+    left: 0;
+    right: auto;
+}
+#alet_css_t4 {
+    font-size: 14px;
+    line-height: 1;
+    padding: 15px 10px;
+    border-radius: 3px;
+    background: rgba(0,0,0,.88);
+    box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px 0 rgba(63,63,68,.15);
+    color: #fff;
+    max-width: 200px;
+    position: fixed;
+    right: 90px;
+    top: 46%;
+    margin-left: -100px;
+    opacity: 0;
+    transform: translateY(70px);
+    transition: transform .4s ease,opacity .4s ease;
+    pointer-events: none;
+    z-index: 500
+}
+#alet_css_t4.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+#purchase_codet4 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f2e0cf;
+    z-index: 100000;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+    text-align: center;
+    padding: 5%;
+    background: #f4f6f8;
+    border: 1px solid #dfe3e8;
+}
+.spcdt4_true #purchase_codet4 {
+  display: none
+}
+#heading_codet4 {
+    font-weight: 800;
+    line-height: 1.1;
+    font-size: 40px;
+    margin: 0;
+    color: #000639;
+}
+#txt_codet4 {
+    color: #000639;
+    margin-top: 1em;
+    margin-bottom: 1.375em;
+}
+#ipt_codet4 {
+    text-align: center;
+    max-width: 400px;
+    height: 50px;
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 1em 1em;
+    color: #212b35;
+    font-size: 1em;
+    box-shadow: 0 0 0 1px #c4cdd5;
+    border: 0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: padding 150ms;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    &:not(.t4Warning):focus {
+      outline: 0;
+      box-shadow: 0 0 0 2px #5c6ac4;
+    }
+}
+#ipt_codet4.t4Warning {
+  border: dashed 2px #ec0101;
+  box-shadow: none;
+}
+#ipt_codet4.t4Warning2 {
+ border-style: solid;
+}
+#btn_codet4 {
+      margin-top: 8px;
+    display: inline-block;
+    padding: 1.0625em 1.875em;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1.133;
+    -webkit-font-smoothing: antialiased;
+    transition: 150ms ease;
+    transition-property: background-color, border-color, box-shadow, color;
+    text-align: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);
+    background-color: #5c6ac4;
+    color: #ffffff;
+    text-transform: uppercase;
+    min-width: 300px;
+    min-height: 40px;
+}
+#minor_codet4 a {
+    margin-top: 15px;
+    color: #454f5b;
+    font-size: 14px;
+        display: block;
+    text-decoration: underline;
+}
+#minor_codet4 a:last-child {
+    margin-top: 10px;
+}
+#res_codet4 {
+    color: #5c6ac4;
+    font-weight: 500;
+}
+#btn_codet4:hover, #btn_codet4:focus {
+    background-color: #202e78;
+    color: #ffffff;
+}
+#btn_codet4:hover {
+    box-shadow: 0 5px 25px 0 rgba(0,0,0,0.25);
+}
+#btn_codet4.loading {
+  pointer-events: none;
+}
+#btn_codet4.loading>span{
+  opacity: 0;visibility: hidden
+}
+#btn_codet4.loading>svg{
+  visibility: visible
+}
+#minor_codet4 a:hover,#minor_codet4 a:focus {
+color: #5c6ac4;
+}
+.imp_icon_ld {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px;
+    margin-left: -15px;
+    visibility: hidden;
+    pointer-events: none;
+}
+@-webkit-keyframes shaket4code {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+@keyframes shaket4code {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+.shaket4code {
+  -webkit-animation-name: shaket4code;
+  animation-name: shaket4code;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+</style>

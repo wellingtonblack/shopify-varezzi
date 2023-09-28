@@ -1,0 +1,519 @@
+{%- liquid
+  assign sid = section.id
+  assign pr_txt = section.settings.pr_txt
+  assign se_blocks = section.blocks
+  assign se_size = se_blocks.size
+  assign cat_lay4 = section.settings.cat_lay4
+  assign cat_lay5 = section.settings.cat_lay5 -%}
+
+{%- for i in (1..1) -%}
+  {%- if section.settings.cp_code and request.page_type == 'index' %}<div class="dn tc mt__40 mb__40 cp_cd_js"><input type="text" class="dcp_cd_ip" value='<div class="inc_lz inc_cat_laz" data-include="/search/?section_id={{sid}}"><div class="lds_bginfinity pr"></div></div>'><button class="dcp_cd_btn">Copy Shortcode</button></div>{% endif -%}
+  {%- if section.settings.hidden and request.page_type == 'index' %}{% break %}{% endif -%}
+
+  <div class="nt_se_{{sid}} {{section.settings.layout}}">
+    {%- render 'section_title',section:section -%}
+    <div class="mt__30 nt_cats_holder row equal_nt hoverz_{{section.settings.hoverz}} cat_size_{{se_size}} cat_lay4_{{cat_lay4}} cat_lay5_{{cat_lay5}} cat_space_{{section.settings.cat_space}} cat_design_{{section.settings.cat_design}}">
+      {%- case se_size -%}
+         {%- when 1 -%}
+            {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/1170x600.png/56cfe1/fff?text=1170x600',ccol:'col-12',for_i:1 -%}
+         {%- when 2 -%}
+            {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/56cfe1/fff?text=570x300',ccol:'col-md-6 col-12',for_i:1 -%}
+            {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/a8dacc/fff?text=570x300',ccol:'col-md-6 col-12',for_i:2 -%}
+         {%- when 3 -%}
+            {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/56cfe1/fff?text=570x630',ccol:'col-md-6 col-12',for_i:1 -%}
+            <div class="col-lg-6 col-md-6 col-12"><div class="row">
+            {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/a6d7cb/fff?text=570x300',ccol:'col-12',for_i:2 -%}
+            {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/f4a896/fff?text=570x300',ccol:'col-12',for_i:3 -%}
+            </div></div>
+         {%- when 4 -%}
+             {%- if cat_lay4 == 1 -%}
+              {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/56cfe1/fff?text=570x630',ccol:'col-md-6 col-12',for_i:1 -%}
+              <div class="col-lg-3 col-md-3 col-6"><div class="row">
+                {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/a6d7cb/fff?text=270x300',ccol:'col-12',for_i:2 -%}
+                {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/f4a896/fff?text=270x300',ccol:'col-12',for_i:3 -%}
+              </div></div>
+              {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/270x630.png/c8b09b/fff?text=270x630',ccol:' col-md-3 col-6',for_i:4 -%}
+            {%- elsif cat_lay4 == 2 -%}
+               <div class="col-md-6 col-12"><div class="row">
+                 {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/56cfe1/fff?text=570x505',ccol:'col-12',for_i:1 -%}
+                 {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/a6d7cb/fff?text=570x315',ccol:'col-12',for_i:3 -%}
+               </div></div>
+               <div class="col-md-6 col-12"><div class="row">
+                 {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/f4a896/fff?text=570x410',ccol:'col-12',for_i:2 -%}
+                 {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/c8b09b/fff?text=570x410',ccol:'col-12',for_i:4 -%}
+               </div></div>
+            {%- elsif cat_lay4 == 3 -%}
+               <div class="col-md-6 col-12"><div class="row">
+                 {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/570x570.png/56cfe1/fff?text=570x570',ccol:'col-12',for_i:1 -%}
+                 {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/a6d7cb/fff?text=570x300',ccol:'col-12',for_i:3 -%}
+               </div></div>
+               <div class="col-md-6 col-12"><div class="row">
+                 {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/f4a896/fff?text=570x300',ccol:'col-12',for_i:2 -%}
+                 {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/570x570.png/c8b09b/fff?text=570x570',ccol:'col-12',for_i:4 -%}
+               </div></div>
+            {%- else -%} 
+              {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/56cfe1/fff?text=570x630',ccol:'col-md-6 col-12',for_i:1 -%}
+              <div class="col-lg-6 col-md-6 col-12"><div class="row">
+              {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/a6d7cb/fff?text=270x300',ccol:'col-6',for_i:2 -%}
+              {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/f4a896/fff?text=270x300',ccol:'col-6',for_i:3 -%}
+              {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/c8b09b/fff?text=570x300',ccol:'col-12',for_i:4 -%}
+              </div></div>
+            {%- endif -%} 
+         {%- when 5 -%}
+              {%- if cat_lay5 == 1 -%}
+                <div class="col-lg-3 col-md-3 col-12">
+                   <div class="row">
+                      {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/56cfe1/fff?text=270x300',ccol:'col-md-12 col-6',for_i:1 -%}
+                      {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/f4a896/fff?text=270x300',ccol:'col-md-12 col-6',for_i:2 -%}
+                   </div>
+                </div>
+                {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/a6d7cb/fff?text=570x630',ccol:'col-md-6 col-12',for_i:3 -%}
+                <div class="col-lg-3 col-md-3 col-12">
+                   <div class="row">
+                      {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/c8b09b/fff?text=270x300',ccol:'col-md-12 col-6',for_i:4 -%}
+                      {%- render 'cat_grid_item',block:se_blocks[4],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/efe1ba/fff?text=270x300',ccol:'col-md-12 col-6',for_i:5 -%}
+                   </div>
+                </div>
+              {%- elsif cat_lay5 == 2 -%}
+               <div class="col-md-6 col-12"><div class="row">
+                 {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/570x570.png/56cfe1/fff?text=570x570',ccol:'col-12',for_i:1 -%}
+                 <div class="col-12"><div class="row">
+                   {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/a6d7cb/fff?text=270x300',ccol:'col-6',for_i:4 -%}
+                   {%- render 'cat_grid_item',block:se_blocks[4],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/efe1ba/fff?text=270x300',ccol:'col-6',for_i:5 -%}
+                 </div></div> 
+               </div></div>
+               <div class="col-md-6 col-12"><div class="row">
+                 {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/f4a896/fff?text=570x300',ccol:'col-12',for_i:2 -%}
+                 {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/570x570.png/c8b09b/fff?text=570x570',ccol:'col-12',for_i:3 -%}
+               </div></div> 
+              {%- elsif cat_lay5 == 3 -%}
+               <div class="col-md-6 col-12"><div class="row">
+                 {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/570x570.png/56cfe1/fff?text=570x570',ccol:'col-12',for_i:1 -%}
+                 {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/a6d7cb/fff?text=570x300',ccol:'col-12',for_i:3 -%}
+               </div></div>
+               <div class="col-md-6 col-12"><div class="row">
+                 {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/f4a896/fff?text=570x270',ccol:'col-12',for_i:2 -%}
+                 {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/c8b09b/fff?text=570x300',ccol:'col-12',for_i:4 -%}
+                 {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/570x270.png/c8b09b/fff?text=570x270',ccol:'col-12',for_i:5 -%}
+               </div></div>
+               {%- elsif cat_lay5 == 4 -%}
+                {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/a6d7cb/fff?text=570x630',ccol:'col-md-6 col-12',for_i:3 -%}
+                <div class="col-lg-3 col-md-3 col-12">
+                   <div class="row">
+                      {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/56cfe1/fff?text=270x300',ccol:'col-md-12 col-6',for_i:1 -%}
+                      {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/f4a896/fff?text=270x300',ccol:'col-md-12 col-6',for_i:2 -%}
+                   </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-12">
+                   <div class="row">
+                      {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/c8b09b/fff?text=270x300',ccol:'col-md-12 col-6',for_i:4 -%}
+                      {%- render 'cat_grid_item',block:se_blocks[4],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/efe1ba/fff?text=270x300',ccol:'col-md-12 col-6',for_i:5 -%}
+                   </div>
+                </div>
+               {%- else -%} 
+                <div class="col-lg-3 col-md-3 col-12">
+                   <div class="row">
+                      {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/56cfe1/fff?text=270x300',ccol:'col-md-12 col-6',for_i:1 -%}
+                      {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/f4a896/fff?text=270x300',ccol:'col-md-12 col-6',for_i:2 -%}
+                   </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-12">
+                   <div class="row">
+                      {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/c8b09b/fff?text=270x300',ccol:'col-md-12 col-6',for_i:4 -%}
+                      {%- render 'cat_grid_item',block:se_blocks[4],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/efe1ba/fff?text=270x300',ccol:'col-md-12 col-6',for_i:5 -%}
+                   </div>
+                </div>
+                {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/570x630.png/a6d7cb/fff?text=570x630',ccol:'col-md-6 col-12',for_i:3 -%}
+              {%- endif -%} 
+         {%- when 6 -%}
+            <div class="col-12">
+               <div class="row">
+                  {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/56cfe1/fff?text=270x300',ccol:'col-md-3 col-6',for_i:1 -%}
+                  {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/a6d7cb/fff?text=270x300',ccol:'col-md-3 col-6',for_i:2 -%}
+                  {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/f4a896/fff?text=570x300',ccol:'col-md-6 col-12',for_i:3 -%}
+               </div>
+            </div>
+            <div class="col-12">
+               <div class="row">
+                  {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/570x300.png/c8b09b/fff?text=570x300',ccol:'col-md-6 col-12',for_i:4 -%}
+                  {%- render 'cat_grid_item',block:se_blocks[4],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/efe1ba/fff?text=270x300',ccol:'col-md-3 col-6',for_i:5 -%}
+                  {%- render 'cat_grid_item',block:se_blocks[5],pr_txt:pr_txt,cimg:'https://placehold.it/270x300.png/a5d0d9/fff?text=270x300',ccol:'col-md-3 col-6',for_i:6 -%}
+               </div>
+            </div>
+         {%- when 7 -%}
+            <div class="col-md-3 col-6"><div class="row">
+               {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/56cfe1/fff?text=540x540',ccol:'col-12',for_i:1 -%}
+               {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/a6d7cb/fff?text=540x540',ccol:'col-12',for_i:2 -%}
+            </div></div>
+             <div class="col-md-3 col-6"><div class="row">
+               {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/f4a896/fff?text=540x540',ccol:'col-12',for_i:5 -%}
+               {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/efe1ba/fff?text=540x540',ccol:'col-12',for_i:4 -%}
+            </div></div>
+            {%- render 'cat_grid_item',block:se_blocks[4],pr_txt:pr_txt,cimg:'https://placehold.it/379x800.png/c8b09b/fff?text=379x800',ccol:'col-md-3 col-6',for_i:3 -%}
+            <div class="col-md-3 col-6"><div class="row">
+               {%- render 'cat_grid_item',block:se_blocks[5],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/a5d0d9/fff?text=540x540',ccol:'col-12',for_i:6 -%}
+               {%- render 'cat_grid_item',block:se_blocks[6],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/a1a19f/fff?text=540x540',ccol:'col-12',for_i:7 -%}
+            </div></div>
+         {%- else -%}
+            <div class="col-md-3 col-6"><div class="row">
+               {%- render 'cat_grid_item',block:se_blocks[0],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/56cfe1/fff?text=540x540',ccol:'col-12',for_i:1 -%}
+               {%- render 'cat_grid_item',block:se_blocks[1],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/a6d7cb/fff?text=540x540',ccol:'col-12',for_i:2 -%}
+            </div></div>
+             <div class="col-md-3 col-6"><div class="row">
+               {%- render 'cat_grid_item',block:se_blocks[2],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/f4a896/fff?text=540x540',ccol:'col-12',for_i:3 -%}
+               {%- render 'cat_grid_item',block:se_blocks[3],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/efe1ba/fff?text=540x540',ccol:'col-12',for_i:4 -%}
+            </div></div>
+             <div class="col-md-3 col-6"><div class="row">
+               {%- render 'cat_grid_item',block:se_blocks[4],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/c8b09b/fff?text=540x540',ccol:'col-12',for_i:5 -%}
+               {%- render 'cat_grid_item',block:se_blocks[5],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/008060/fff?text=540x540',ccol:'col-12',for_i:6 -%}
+            </div></div>
+            <div class="col-md-3 col-6"><div class="row">
+               {%- render 'cat_grid_item',block:se_blocks[6],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/a5d0d9/fff?text=540x540',ccol:'col-12',for_i:7 -%}
+               {%- render 'cat_grid_item',block:se_blocks[7],pr_txt:pr_txt,cimg:'https://placehold.it/540x540.png/a1a19f/fff?text=540x540',ccol:'col-12',for_i:8 -%}
+            </div></div>
+      {%- endcase -%}
+    </div>
+  </div>
+{%- endfor -%}
+{%- render 'section_css',section:section -%}
+
+{%- schema -%}
+  {
+    "name": "Collection list Packery",
+    "class": "nt_section type_collection_list",
+    "max_blocks": 8,
+    "settings": [
+      {
+        "type": "header",
+        "content": "== Title Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Collection list Packery"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_title",
+        "label": "Sub Text",
+        "default": "Sub Text"
+      },
+      {
+        "type": "select",
+        "id": "sub_font",
+        "default": "2",
+        "options": [
+         {
+            "value": "1",
+            "label": "Body font"
+         },
+         {
+            "value": "2",
+            "label": "Sub title font"
+          }
+        ],
+        "label": "Sub Text use font:"
+      },
+      {
+        "type": "select",
+        "id": "style_title",
+        "options": [
+         {
+            "value": "title_1",
+            "label": "Design 1"
+         },
+         {
+            "value": "title_2",
+            "label": "Design 2"
+          },
+         {
+            "value": "title_3",
+            "label": "Design 3"
+          },
+         {
+            "value": "title_4",
+            "label": "Design 4"
+          },
+         {
+            "value": "title_5 lazyload",
+            "label": "Design 5"
+          },
+         {
+            "value": "title_6",
+            "label": "Design 6"
+          },
+         {
+            "value": "title_7 +la",
+            "label": "Design 7 (with line-awesome)"
+          },
+         {
+            "value": "title_8",
+            "label": "Design 8"
+          },
+         {
+            "value": "title_9",
+            "label": "Design 9"
+          },
+         {
+            "value": "title_10",
+            "label": "Design 10"
+          },
+         {
+            "value": "title_11",
+            "label": "Design 11"
+          },
+         {
+            "value": "title_12",
+            "label": "Design 12"
+          },
+         {
+            "value": "title_13",
+            "label": "Design 13"
+          }
+        ],
+        "label": "Design Title:"
+      },
+      {
+        "type": "text",
+        "id": "ic_tt",
+        "label": "Style 7 icon line-awesome",
+        "default": "gem"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_clpr",
+        "label": "Use icon color primary?",
+        "default": false
+      },
+      {
+        "type": "paragraph",
+        "content": "[Get icons Line awesome](https://icons8.com/line-awesome)"
+      },
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "hoverz",
+        "label": "Enable zoom image on hover?",
+        "default": true
+      },
+     {
+       "type": "select",
+       "id": "cat_design",
+       "options": [
+        {
+           "value": "1",
+           "label": "Default"
+         },
+         {
+           "value": "2",
+           "label": "Design 2"
+         },
+         {
+           "value": "3",
+           "label": "Design 3"
+         },
+         {
+           "value": "4",
+           "label": "Design 4"
+         },
+         {
+           "value": "5", 
+           "label": "Design 5"
+         },
+         {
+           "value": "6",
+           "label": "Design 6"
+         },
+         {
+           "value": "7",
+           "label": "Design 7"
+         },
+         {
+           "value": "8",
+           "label": "Design 8"
+         }
+       ],
+       "label": "Collections design",
+       "default": "1"
+     },
+     {
+       "type": "select",
+       "id": "cat_space",
+       "options": [
+        {
+           "value": "30",
+           "label": "30"
+         },
+         {
+           "value": "20",
+           "label": "20"
+         },
+         {
+           "value": "10",
+           "label": "10"
+         },
+         {
+           "value": "6",
+           "label": "6"
+         },
+         {
+           "value": "2",
+           "label": "2"
+         },
+         {
+           "value": "0",
+           "label": "0"
+         }
+       ],
+       "label": "Space between Collections",
+       "default": "30"
+     },
+      {
+        "type": "text",
+        "id": "pr_txt",
+        "label": "Products Text",
+        "default": "products"
+      },
+     {
+        "type": "range",
+        "id": "cat_lay4",
+        "label": "4 Block layout:",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "step": 1
+      },
+     {
+        "type": "range",
+        "id": "cat_lay5",
+        "label": "5 Block layout:",
+        "default": 1,
+        "min": 1,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false,
+        "info": "Hidden section on home page, but still visible on blog posts, product page, pages as shortcode."
+      },
+      {
+        "type": "checkbox",
+        "id": "cp_code",
+        "label": "Show copy shortcode?",
+        "default": false,
+        "info": "Copy shortcode only show on admin editor."
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "nt_full",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank",
+        "default": "50px,,50px,",
+        "placeholder": "50px,,50px,"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank",
+        "placeholder": "50px,,50px,"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin",
+        "placeholder": "50px,,50px,"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding",
+        "placeholder": "50px,,50px,"
+      }
+    ],
+    "blocks": [{
+    "type": "collection",
+    "name": "Collection",
+    "settings": [
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      },
+      {
+         "type": "image_picker",
+         "id": "image",
+         "label": "Image"
+       },
+      {
+        "type": "select",
+        "id": "img_align",
+        "default": "center",
+        "options": [
+         {
+            "value": "top",
+            "label": "Top"
+         },
+         {
+            "value": "center",
+            "label": "Middle"
+         },
+         {
+            "value": "bottom",
+            "label": "Bottom"
+         }
+        ],
+        "label": "Image alignment"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title block (optional)",
+        "info": "Leave empty to use 'collection title' title. Enter key 'hide_title' to hide title."
+      }
+      ]
+    }],
+    "presets": [
+      {
+        "name": "6. Collection list Packery",
+        "category": "I. Collections",
+        "blocks": [
+          { "type": "collection" },
+          { "type": "collection" },
+          { "type": "collection" },
+          { "type": "collection" }
+        ]
+      }
+    ]
+  }
+{% endschema %}

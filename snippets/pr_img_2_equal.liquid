@@ -1,0 +1,8 @@
+{%- render 'product_labels',product:product -%}{%- assign image = product.images[0] -%}
+
+<a class="db" href="{{url_last}}">
+<div class="pr_lazy_img main-img nt_img_ratio lazyload nt_bg_lz" data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{image.aspect_ratio}}" data-sizes="auto"></div>
+</a>
+{%- if product.images.size > 1 -%}{%- assign image = product.images[1] -%}
+<div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0"><div class="pr_lazy_img back-img pa lazyload nt_bg_lz" data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{image.aspect_ratio}}" data-sizes="auto"></div></div>
+{%- endif -%} 

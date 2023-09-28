@@ -1,0 +1,85 @@
+{%- assign pr_curent = settings.pr_curent -%}
+{%- capture min_html -%}
+  "theme_ver":"Kalles Shopify v1.5.1",
+  "scrollTop":100,
+  "pjaxTimeout":5000,
+  "dragThreshold":10,
+  "backtop":{{settings.backtop | json }},
+  "pagination":{{settings.use_pagination | json }},
+  "review":{%- if settings.use_pr_rating or settings.use_pr_page_rating -%}true{%- else -%}false{%- endif -%},
+  "app_review":{{settings.app_review | json  }},
+  "ajax_scroll":{{ settings.ajax_scroll_top | json }},
+  "ajax_shop":{{ settings.ajax_shop | json }},
+  "ajax_scroll_offset":"100",
+  "ntla_ck":{% if pr_curent == "1" %}false{% else %}{{settings.show_first_img | json }}{% endif %},
+  "pr_curent":{{pr_curent | json }},
+  "use_clicking_vimg":{{settings.use_clicking_vimg | json }},
+  "PleaseChoosePrOptions":{{'products.product.Please_choose_pr_options' | t | json }}, 
+  "enableHistoryState":{% if pr_curent == "1" %}false{% else %}{{settings.enable_his}}{% endif %},
+  "pr_incoming_mess":{{settings.pr_incoming_mess | json }},
+  "use_notify_me":{{ settings.use_notify_me | json }},
+  "use_vimg":{{ settings.use_vimg | json }},
+  "use_sticky_des":{{ settings.use_sticky_des | json }},
+  "wishlist_type":{{ settings.wishlist_type | json }},
+  "type_filters":{{ settings.type_filters | json }},
+  "auto_hide_ofsock":{{ settings.auto_hide_ofsock | json }},
+  "show_hide_ofsock":{{ settings.show_hide_ofsock | json }},
+  "added_to_cart": {{ 'products.popup.added_to_cart' | t | json }},
+  "view_cart": {{ 'products.popup.view_cart' | t | json }},
+  "continue_shopping": {{ 'products.popup.continue_shopping' | t | json }},
+  "save_js":{{ 'products.product.save_js' | t: saved_amount:'[sale]' | json}},
+  "disOnlyStock":false,{%- comment -%}Disable only stock notice{%- endcomment -%}
+  "disATCerror":false,{%- comment -%}Disable add to cart error notice{%- endcomment -%}
+   "close":"Close (Esc)",
+   "share_fb":"Share on Facebook",
+   "pin_it":"Pin it",
+   "tweet":"Tweet",
+   "download_image":"Download image",
+   "img_captions":true,
+   "z_magnify":2,
+   "z_touch":false,
+   "galleryType":"pswp",{%- comment -%}pswp mfp{%- endcomment -%}
+   "maxSpreadZoom":1,
+   "bgOpacity":1,
+   "currencies":{{settings.show_multiple_currencies | json}},
+   "currency_visitor":{{settings.auto_currency | json}},
+   "currency_format":{{settings.currency_format | json}},
+   "round_currency":{{settings.round_currency | json}},
+   "hover_currency":{{settings.hover_currency | json}},
+   "remove_currency":false,
+   "round_cur_shop":false,
+   "after_action_atc":{{settings.after_action_atc |json}},
+   "ins_host":"https://d3ejra0xbg20rg.cloudfront.net",
+   "bannerCountdown":"%D days %H:%M:%S",
+   "prItemCountdown":"%D Days %H:%M:%S",
+  "countdown_days":{{ 'products.grid_items.countdown_days' | t | json}},
+  "countdown_hours":{{ 'products.grid_items.countdown_hours' | t | json}},
+  "countdown_mins":{{ 'products.grid_items.countdown_mins' | t | json}},
+  "countdown_sec":{{ 'products.grid_items.countdown_sec' | t | json}},
+  "multiple_rates": {{ 'cart.general.multiple_rates' | t | json}},
+  "one_rate": {{ 'cart.general.one_rate' | t | json}},
+  "no_rates": {{ 'cart.general.no_rates' | t | json}},
+  "rate_value": {{ 'cart.general.rate_value' | t | json}},
+  "agree_checkout": {{ 'cart.general.agree_checkout' | t | json}},
+  "zoom_tp":{{settings.zoom_tp |json}},
+  "search_prefix":'*',
+  "platform_email":{{settings.platform_email |json}},
+  "checkbox_mail":{{settings.checkbox_mail |json}},
+  "edit_item":{{settings.edit_item |json}}
+{%- endcapture -%}
+var nt_settings = { {{- min_html | strip_newlines | remove: "  " -}} };
+{%- if settings.prevent_copying -%}
+    // disable_right_click
+    document.addEventListener("contextmenu", function(event) {var notInput = (event.target || event.srcElement).tagName.toLowerCase() !== "input" && (event.target || event.srcElement).tagName.toLowerCase() !== "textarea";if (notInput && (event.target || event.srcElement).innerText) {event.preventDefault();} });
+    // disable_right_click_img
+    document.addEventListener("mousedown", function(event) { if ((event.target || event.srcElement).tagName.toLowerCase() === "img") {
+        // Middle-click to open in new tab
+        if (event.which == 2) { event.preventDefault(); } 
+    } });
+    document.addEventListener("contextmenu", function(event) { if ((event.target || event.srcElement).tagName.toLowerCase() === "img") { event.preventDefault(); } });
+    // Drag and drop <img> elements
+    const disableDragAndDrop = function(){document.body.setAttribute("ondragstart", "return false;");document.body.setAttribute("ondrop", "return false;");};
+    if (document.readyState === "complete") {disableDragAndDrop();} else {document.addEventListener("DOMContentLoaded", disableDragAndDrop);}
+    // disable_right_click_bg_img
+    document.addEventListener("contextmenu", function(event) { if ((event.target || event.srcElement).style.backgroundImage) { event.preventDefault(); } });
+{%- endif -%}

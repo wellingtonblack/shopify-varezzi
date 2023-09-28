@@ -1,0 +1,4 @@
+{%- render 'product_labels',product:product -%}{%- assign image = product.images[0] -%}
+<a class="db" href="{{url_last}}">
+	<div class="pr_lazy_img main-img nt_img_ratio lazyload nt_bg_lz" data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{image.aspect_ratio}}" data-sizes="auto"></div>
+</a>

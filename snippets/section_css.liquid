@@ -1,0 +1,36 @@
+{%- liquid
+  assign mg = section.settings.mg
+  assign pd = section.settings.pd
+  assign mg_mb = section.settings.mg_mb
+  assign pd_mb = section.settings.pd_mb
+  assign sid = section.id -%}
+
+{%- capture style -%}
+	{%- if section.settings.cl_bg != blank -%}#shopify-section-{{sid}} {background-color: {{section.settings.cl_bg}} !important;}{%- endif -%}
+	{%- if mg != blank or pd != blank -%} 
+	.nt_se_{{sid}} {
+	   {%- if mg != blank %}{% assign arr_mg = mg | remove:' ' | split:',' -%}
+		   margin-top: {{arr_mg[0]}} !important;margin-right: {{arr_mg[1]}} !important;margin-bottom: {{arr_mg[2]}} !important;margin-left: {{arr_mg[3]}} !important;
+		   {%- if arr_mg[3] != blank and section.settings.layout == 'nt_full' -%}width: calc(100% - {{arr_mg[3]}} - {{arr_mg[1]}});width: -webkit-calc(100% - {{arr_mg[3]}} - {{arr_mg[1]}});{%- endif -%}
+	   {%- endif -%}
+	   {%- if pd != blank %}{% assign arr_pd = pd | remove:' ' | split:',' -%}
+	       padding-top: {{arr_pd[0]}} !important;padding-right: {{arr_pd[1]}} !important;padding-bottom: {{arr_pd[2]}} !important;padding-left: {{arr_pd[3]}} !important;
+	   {%- endif -%}
+	}
+	{%- endif -%}
+	{%- if mg_mb != blank or pd_mb != blank -%} 
+	@media only screen and (max-width: 767px) {
+		.nt_se_{{sid}} {
+		   {%- if mg_mb != blank %}{% assign arr_mg = mg_mb | remove:' ' | split:',' -%}
+			   margin-top: {{arr_mg[0]}} !important;margin-right: {{arr_mg[1]}} !important;margin-bottom: {{arr_mg[2]}} !important;margin-left: {{arr_mg[3]}} !important;
+			   {%- if arr_mg[3] != blank and section.settings.layout == 'nt_full' -%}width: calc(100% - {{arr_mg[3]}} - {{arr_mg[1]}});width: -webkit-calc(100% - {{arr_mg[3]}} - {{arr_mg[1]}});{%- endif -%}
+		   {%- endif -%}
+		   {%- if pd_mb != blank %}{% assign arr_pd = pd_mb | remove:' ' | split:',' -%}
+		       padding-top: {{arr_pd[0]}} !important;padding-right: {{arr_pd[1]}} !important;padding-bottom: {{arr_pd[2]}} !important;padding-left: {{arr_pd[3]}} !important;
+		   {%- endif -%}
+		}
+	}
+	{%- endif -%}
+{%- endcapture -%}
+
+{%- style -%}{{ style | strip_newlines | remove:"  "}}{%- endstyle -%}

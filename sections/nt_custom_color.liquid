@@ -1,0 +1,233 @@
+{%- capture min_html -%}
+  {%- if section.blocks.size > 0 -%}
+  {%- assign img_size_sw = '100x100' -%} 
+  {%- assign color_primary = settings.color_primary -%} 
+    {%- comment -%}<style id="cl_css_jsnt"></style>{%- endcomment -%}
+    <style id="cl_css_jsnt">
+      :root {
+          --primary: {{color_primary}};
+          --progress-bar-color: {{color_primary}}; 
+      }
+      {%- for block in section.blocks -%}
+          {%- liquid
+            assign b_title = block.settings.title | split:';' 
+            if b_title == blank
+              continue
+            endif
+
+            assign title_h = b_title | join: '-kt4t-' | handleize | split:'-kt4t-'
+            assign color_1_c = block.settings.color_1_c -%}
+
+            {%- case block.type -%} 
+               {%- when 'bg_color' -%}
+                  {%- assign color_2_c = block.settings.color_2_c -%}
+                  .bg_color_{{title_h | join: ',.bg_color_'}}{ {%-if color_1_c != blank -%}background-color: {{color_1_c}};{%-endif -%}{%-if color_1_c != blank and color_2_c != blank -%}background: -webkit-linear-gradient({{color_1_c}} 50%, {{color_2_c}} 50%);background: -o-linear-gradient({{color_1_c}} 50%, {{color_2_c}} 50%);background: -moz-linear-gradient({{color_1_c}} 50%, {{color_2_c}} 50%);background: linear-gradient({{color_1_c}} 50%, {{color_2_c}} 50%);{%-endif -%} }
+                  {%- if block.settings.color_img and block.settings.color_jpg != blank -%} .bg_color_{{title_h}}.lazyloaded{background-image: url('{{ block.settings.color_jpg | img_url: img_size_sw, crop: 'center' }}');}{%- endif -%}
+
+               {%- when 'lb_menu' -%}
+                  .lb_menu_{{title_h| join: ',.lb_menu_'}}{ {%-if color_1_c != blank -%}background-color: {{color_1_c}};{%-endif -%}{% if block.settings.color_txt != blank %}color: {{block.settings.color_txt }}{% endif %} }
+
+               {%- else -%}
+                  .nt_label.{{title_h| join: ',.nt_label.'}}{ {%-if color_1_c != blank -%}background-color: {{color_1_c}};{%-endif -%}{% if block.settings.color_txt != blank %}color: {{block.settings.color_txt }}{% endif %} }
+
+            {%- endcase -%}
+          
+      {%- endfor -%}
+    </style>
+    {%- comment -%}{%- if section.blocks.first.shopify_attributes contains 'data-theme-editor' -%}{%- endif -%}{%- endcomment -%}
+      <div id="admclnt" class="mfp-hide">
+         <div class="tip-box mb__35">
+            <p class="mg__0"><strong>WARNING:</strong> If you want this css apply on online store then you must click button "Update on online store" here. Max settings 200 code custom color. If you want more than, please contact support us, Kind Regards!</p>
+         </div>
+         <style>
+           a.put_asset_js.button {
+             padding: 0;
+             min-height: auto;
+             box-shadow: inset 0 -2px 0 rgba(0,0,0,.15);
+             background-color: #008060;
+             border-color: #008060;
+             color: #ffffff;
+             border-radius: 5px;
+             font-size: 16px;
+           }
+          .put_asset_js span {
+            padding: 8px 25px;
+            display: inline-block;
+          }
+          .put_asset_js.loading {
+              -webkit-animation-duration: 1s;
+              animation-duration: 1s;
+              -webkit-animation-duration: 1s;
+              animation-duration: 1s;
+              -webkit-animation-fill-mode: both;
+              animation-fill-mode: both;
+              -webkit-animation-iteration-count: infinite;
+              animation-iteration-count: infinite;
+              -webkit-animation-name: fadeInt4ad;
+              animation-name: fadeInt4ad;
+              pointer-events: none
+          }
+          .put_asset_js.loading span,.put_asset_js.t4_done span {
+             opacity: 0
+          }
+          .put_asset_js.loading .txt4_css_doing,
+          .put_asset_js.t4_done .txt4_css_done {
+             opacity: 1
+          }
+          @-webkit-keyframes fadeInt4ad {
+            from {
+              opacity: 0;
+            }
+
+            to {
+              opacity: 1;
+            }
+          }
+          @keyframes fadeInt4ad {
+            from {
+              opacity: 0;
+            }
+
+            to {
+              opacity: 1;
+            }
+          }
+         .tip-box {padding:10px;-webkit-box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);background-color: #fcb800;color: #222;font-weight: 600;background-color: #ffc421;border: 2px solid #000;box-shadow: 0px 0px 0px rgba(0,0,0,0.4);}
+         </style>
+         <a href="#" class="put_asset_js button mb__60 pr oh tc" data-key='assets/sett_cl.css' data-sl='#cl_css_jsnt'>
+           <span class="txt4_css_do">Update on online store</span>
+           <span class="txt4_css_doing op__0 pa t__0 l__0 r__0 b__0">Updating style</span>
+           <span class="txt4_css_done op__0 pa t__0 l__0 r__0 b__0">Updated style</span>
+         </a>
+         <h3 class="section-title tc pr flex fl_center al_center fs__24 divider mb__30"><span class="mr__10 ml__10">Demo Swath, Label settings Preview:</span></h3>
+         <div class="row fl_center al_center mt__30">
+         {%- for block in section.blocks -%}
+           {%- if block.settings.title != "" -%}{%- assign title = block.settings.title | split:';' | first -%}{%- assign title_h = title | handleize -%}
+              <div class="col-auto pt__15 pb__15 tc" id="item_{{block.id}}" {{block.shopify_attributes}}>
+              {%- case block.type -%}
+                 {%- when 'bg_color' -%}
+                 <div class="swatch__list lh__1 nt_swatches_on_grid">
+                  <span class="nt_swatch_on_bg swatch__list--item pr ttip_nt tooltip_top">
+                    <span class="tt_txt">{{title}}</span>
+                    <span class="swatch__value bg_color_{{title_h}} lazyload"></span>
+                  </span>
+                 </div>
+
+                 {%- when 'lb_menu' -%}<span class="lbc_nav_mb lb_menu_{{title_h}}">{{title}}</span>
+
+                 {%- else -%}{%- assign splitTags = title | split:'badge_' | last -%}<span class="nt_label {{splitTags | handleize}}">{{splitTags}}</span>
+
+              {%- endcase -%}
+              <h5 class="mg__0 mt__5">{{forloop.index}}. {{ title}}</h5>
+            </div>
+           {%- endif -%}
+         {%- endfor -%}
+       </div>
+      </div>
+
+  {%- endif -%}
+{%- endcapture -%}
+{{min_html | strip_newlines | remove: "  "}}
+
+{%- schema -%}
+  {
+    "name": "Swatch, Label submenu",
+    "max_blocks": 200,
+    "settings": [
+      {
+      "type": "paragraph",
+      "content": "Set name the color and select the color code you want to customize."
+      },
+      {
+      "type": "paragraph",
+      "content": "Separate by a comma ; . If you want support multilingual"
+      },
+      {
+      "type": "paragraph",
+      "content": "Eg: yellow; jaune"
+      }
+    ],
+    "blocks": [
+      {
+        "type":"bg_color",
+        "name":"Swatch color",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Color Name",
+            "info": "eg: yellow"
+          },
+          {
+            "type": "color",
+            "id": "color_1_c",
+            "label": "Select color"
+          },
+          {
+            "type": "color",
+            "id": "color_2_c",
+            "label": "Select color 2 (optional)"
+          },
+          {
+            "type": "checkbox",
+            "id": "color_img",
+            "label": "Show image?"
+          },
+          {
+            "type": "image_picker",
+            "id": "color_jpg",
+            "label": "Color image",
+            "info": "100px x 100px recommended"
+          }
+        ]
+      },
+      {
+        "type":"lb_menu",
+        "name":"Label menu color",
+        "settings": [
+           {
+              "type": "textarea",
+              "id": "title",
+              "label": "Label Name",
+              "info": "eg: Sale"
+            },
+            {
+              "type": "color",
+              "id": "color_1_c",
+              "label": "Backgroung color"
+            },
+          {
+            "type": "color",
+            "id": "color_txt",
+            "label": "Text color",
+            "default":"#fff"
+          }
+        ]
+      },
+      {
+        "type":"nt_label",
+        "name":"Label product custom",
+        "settings": [
+           {
+              "type": "textarea",
+              "id": "title",
+              "label": "Label Name",
+              "info": "eg: Sale"
+            },
+            {
+              "type": "color",
+              "id": "color_1_c",
+              "label": "Backgroung color"
+            },
+          {
+            "type": "color",
+            "id": "color_txt",
+            "label": "Text color",
+            "default":"#fff"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+

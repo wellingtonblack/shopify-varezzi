@@ -1,0 +1,171 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="row fl_center mt__60 mb__100">
+  {%- for block in section.blocks -%}
+  {%- case block.type -%}
+      {%- when '1' -%}
+         <div class="col-{{block.settings.cl_mb}} col-md-{{block.settings.cl}} {{block.settings.al}} mt__25">
+            <h3 class="fs__20">{{block.settings.title}}</h3>
+            <p class="mg__0">{{block.settings.content}}</p>
+         </div>
+      {%- when '2' -%}
+         <div class="col-12 mt__35"><blockquote><p> {{block.settings.title}}</p></blockquote></div>
+      {%- when '3' -%}
+         <div class="col-12 col-md-4 mt__30">
+            <div class="jas-member tc pr pb__15">
+               {%- if block.settings.image -%}{%- assign image = block.settings.image %}{% assign ratio = image.aspect_ratio -%}
+               <div class="nt_img_ratio lazyload nt_bg_lz" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+               {%- endif -%}
+               <h4 class="mt__15 fwsb">{{block.settings.title}}</h4>
+               <span>{{block.settings.position}}</span>
+               <div class="social pa w__100 ts__03">
+                  {%- if block.settings.facebook != blank %}<a class="facebook" href="{{ block.settings.facebook }}" target="_blank"><i class="lab la-facebook-f"></i></a>{% endif -%}
+                  {%- if block.settings.twitter != blank %}<a class="twitter" href="{{ block.settings.twitter }}" target="_blank"><i class="lab la-twitter"></i></a>{% endif -%}
+                  {%- if block.settings.dribbble != blank %}<a class="dribbble" href="{{ block.settings.dribbble }}" target="_blank"><i class="lab la-dribbble"></i></a>{% endif -%}
+                  {%- if block.settings.behance != blank %}<a class="behance" href="{{ block.settings.behance }}" target="_blank"><i class="lab la-behance"></i></a>{% endif -%}
+               </div>
+            </div>
+         </div>
+      {%- else -%}
+         <div class="col-12 pg_us_content">{{page.content}}</div>
+   {%- endcase -%}
+   {%- endfor -%}
+  </div>
+   <style>.jas-member:before{content:'';position:absolute;background:rgba(246,246,246,.9);left:0;top:0;width:100%;height:100%;opacity:0;transition:all .3s;z-index:1}.jas-member:hover .social,.jas-member:hover:before{opacity:1}.jas-member .social{bottom:30px;opacity:0;z-index:2}.jas-member h4{margin-bottom:0}.jas-member .social a{margin:0 8px}.jas-member .social i{font-size:20px}.jas-member .nt_img_ratio{background-size:cover;background-repeat:no-repeat;background-position:center}</style>
+{%- endif -%}
+
+{%- schema -%}
+  {
+    "name": "About us",
+    "class": "container mt__60 mb__60",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "1",
+        "name": "Richtext",
+        "settings": [
+          {"type":"text","id":"title","label":"Heading","default":"OUR MISSION"},
+          {"type":"textarea","id":"content","label":"Content","default":"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, <em>totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae</em> vitae dicta sunt explicabo nemo enim ipsam."},
+          {
+            "type": "select",
+            "id": "al",
+            "label": "Text align",
+            "default": "txtn",
+            "options": [
+            {
+              "value": "txtn",
+              "label": "Default"
+            },
+            {
+              "value": "tc",
+              "label": "Center"
+            }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl",
+            "label": "Container width",
+            "default": "6",
+            "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "2",
+        "name": "Quote",
+        "settings": [
+         {
+          "type":"textarea","id":"title","label":"Content Quote","default":"I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Quis nostrum exercitationem ullam."
+          }
+        ]
+      },
+      {
+        "type": "3",
+        "name": "Member",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image Avatar"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Name",
+            "default": "Add a name"
+          },
+          {
+            "type": "text",
+            "id": "position",
+            "label": "Position",
+            "default": "Developer"
+            },
+            {
+          "type": "header",
+          "content": "== social"
+        },
+        {
+            "type": "text",
+            "id": "facebook",
+            "label": "Facebook",
+            "info": "https:\/\/facebook.com\/shopify"
+          },
+          {
+            "type": "text",
+            "id": "twitter",
+            "label": "Twitter",
+            "info": "https:\/\/twitter.com\/shopify"
+          },
+          {
+            "type": "text",
+            "id": "dribbble",
+            "label": "Dribbble",
+            "info": "https:\/\/dribbble.com\/shopify"
+          },
+          {
+            "type": "text",
+            "id": "behance",
+            "label": "Behance",
+            "info": "https:\/\/behance.net\/user"
+          }
+        ]
+      },
+      {
+        "type": "4",
+        "name": "Page Content",
+        "limit": 1
+      }
+    ],
+    "default": {
+      "blocks": [
+        { "type": "1"},{ "type": "1"},{ "type": "1"},{ "type": "1"},{ "type": "2"},{ "type": "3"},{ "type": "3"},{ "type": "3"}
+      ]
+    }
+  }
+{% endschema %}

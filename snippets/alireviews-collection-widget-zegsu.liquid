@@ -1,0 +1,8 @@
+
+<!-- Zegsu Reviews App -->
+<link rel="stylesheet" class="zegsu-review-review-css" href="https://zegsu.com/dist/css/reviews/reviews.css?version=2">
+{% if custom_collection == nil %}
+<script class="zegsu-review-js" async defer src='https://zegsu.com/shopify/reviews/collection-widget?token=1692822550&shop=melhor-que-a-encomenda.myshopify.com&v=2&productIds[]={{ collection.products | map: "id" | join: "&productIds[]="}}'></script>
+{% else %}
+<script class="zegsu-review-js" async defer src='https://zegsu.com/shopify/reviews/collection-widget?token=1692822550&shop=melhor-que-a-encomenda.myshopify.com&v=2&productIds[]={{ custom_collection.products | map: "id" | join: "&productIds[]="}}'></script>
+{% endif %}

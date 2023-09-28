@@ -1,0 +1,266 @@
+{% if template.name == 'product' %}
+  <script src="https://www.mercadopago.com/v2/security.js" view="item"></script>
+{% endif %}
+
+{% if template.name == 'index' %}
+  <script src="https://www.mercadopago.com/v2/security.js" view="home"></script>
+{% endif %}
+
+{% if template.name == 'search' %}
+  <script src="https://www.mercadopago.com/v2/security.js" view="search"></script>
+{% endif %}
+
+<style>
+    .adoorei-loader {display: none; position: fixed; width: 100%; height: 100%; background: #fff; left: 0; top: 0; z-index:99999}.adooHdnEl{display:none;}
+    .adoorei-loading{position:fixed;overflow:show;margin:auto;top:0;left:0;bottom:0;right:0;width:50px;height:50px}.adoorei-spinner-msg{margin-top:1rem;}.adoorei-loading:not(:required){text-shadow:none;background-color:transparent;border:0; width:320px;text-align: -webkit-center;}.adoorei-loading-spinner{content:'';display:block;font-size:10px;width:50px;height:50px;margin-top:-.5em;border:5px solid #999;border-radius:100%;border-bottom-color:transparent;-webkit-animation:spinner 1s linear 0s infinite;animation:spinner 1s linear 0s infinite}@-webkit-keyframes spinner{0%{-webkit-transform:rotate(0);-moz-transform:rotate(0);-ms-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}@-moz-keyframes spinner{0%{-webkit-transform:rotate(0);-moz-transform:rotate(0);-ms-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}@-o-keyframes spinner{0%{-webkit-transform:rotate(0);-moz-transform:rotate(0);-ms-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes  spinner{0%{-webkit-transform:rotate(0);-moz-transform:rotate(0);-ms-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}
+
+</style>
+
+<div class="adoorei-loader">
+    <div class="adoorei-loading">
+    <div class = "adoorei-loading-spinner"></div>
+    <div class = "adoorei-spinner-msg">Estamos finalizando o seu pedido...</div> 
+    </div>
+</div>
+
+
+<script type='text/javascript'>
+
+    
+	var cart_cookie = getCookie('cart');
+  
+  	if(cart_cookie)
+      		getAjax('https://api.adoorei.com/public/shopify/cart-status/' + cart_cookie, function (cart_status) {
+        
+        if(cart_status == 1) {
+          	document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          	location.reload();
+        }
+      });
+      
+      document.addEventListener("DOMContentLoaded", function(event) {
+	    let mnCartCheckoutBtn = document.querySelectorAll('[data-action="toggle-mini-cart"]');
+                      
+       	for (let i = 0; i < mnCartCheckoutBtn.length; i++) {mnCartCheckoutBtn[i].dataset.action = 'adoorei-MnCart'; mnCartCheckoutBtn[i].setAttribute('href', '/cart');}
+       	
+
+       	var inpSkipAdoo = document.createElement("input");
+       	
+       	inpSkipAdoo.setAttribute('name', 'inpSkipAdoo');
+       	
+       	inpSkipAdoo.setAttribute('value', 'y');
+       	
+       	inpSkipAdoo.setAttribute('type', 'text');
+       	
+       	inpSkipAdoo.setAttribute('style', 'display: none');
+       	
+       	let mnCartForm = document.querySelectorAll('[id="mini-cart"]');
+                      
+       	for (let i = 0; i < mnCartForm.length; i++) {mnCartForm[i].setAttribute('method', 'GET'); mnCartForm[i].addEventListener('submit', fakeClick);}
+	});
+
+	
+
+	var currentShopPage = '{{ template.name }}'
+        ,   adooreiCartEndpoint = 'https://api.adoorei.com/public/shopify/cart'
+        ,   currentShop = '{{ shop.secure_url }}';
+    
+    var checkoutBtncss = '<style id="adoorei-btn-style" type="text/css"> body .adoorei-CrtpageMainFrm input[type="submit"]:not([name="update"]), body .adoorei-CrtpageMainFrm button[type="submit"]:not([name="update"]), body #main-cart-footer [name="checkout"]:not([class*="adoorei_elem_"]):not([name="update"]),  body .adoorei_check_mainBtn[name="checkout"]:not([class*="adoorei_elem_"]):not([name="update"]), body input.adoorei_check_mainBtn:not([class*="adoorei_elem_"]):not([name="update"]) { display: none !important; }body .adoorei-CrtpageMainFrm .adoorei_check_mainBtn.adoorei_elem_mainBtn[type="submit"]:not(.bold_hidden){ display: inline-block !important; } </style>';
+  
+    function showAdooreiLoader() {
+        var el = document.querySelector('.adoorei-loader');
+        el.style.display = 'block';
+    }
+
+    function hideAdooreiLoader() {
+        var el = document.querySelector('.adoorei-loader');
+        el.style.display = 'none';
+    }
+        
+    if (currentShopPage == 'cart') {
+      
+      showAdooreiLoader();
+      
+      getAjax('/cart.json', function (response) {
+            var cartPayload = JSON.parse(response);
+
+            var data = {
+                shop: Shopify.shop,
+                origin: document.location.host,
+                cart_payload: cartPayload
+            };
+            
+            postAjax(adooreiCartEndpoint, JSON.stringify(data), function (response) {
+                var resp = JSON.parse(response);
+
+                if (!resp.active) {
+                  hideAdooreiLoader();
+                } else {
+                  
+                  var otherButtons = document.getElementsByClassName('cartX_check_mainBtn');
+
+                  for (var i = 0; i < otherButtons.length; i ++) {
+                        otherButtons[i].setAttribute('style', 'display: none !important');
+                  }
+                  
+                  var getHead = document.getElementsByTagName('head')[0];
+                  getHead.insertAdjacentHTML('beforeend', checkoutBtncss);
+                  var getForm = document.getElementsByTagName('form'); var cartFrmId,getCheckoutBtn;
+                  
+                  
+                  let checkoutBtnFound = false;
+
+                  for (var i = 0; i < getForm.length; i++) {
+                    var formAction = getForm[i].action;  formAction = formAction.split(currentShop);
+
+                    if (formAction[0].includes('/checkout') || formAction.includes('/checkout') || ((formAction.includes('/cart')) && (!formAction.includes('cart/add'))) || ((formAction[0].includes('/cart')) && (!formAction[0].includes('cart/add')))) {
+                      if (getForm[i].getAttribute('id')){
+                        cartFrmId = getForm[i].getAttribute('id');
+                      } else {
+                        getForm[i].setAttribute('id','adoorei-CrtpageMainFrm'); cartFrmId = getForm[i].getAttribute('id');
+                      }
+                      getForm[i].classList.add('adoorei-CrtpageMainFrm');
+                      getCheckoutBtn = getForm[i].elements['checkout'] || document.querySelector('a[href="/checkout"]') || document.querySelector('form[action="/cart"] input[type="submit"]')  || document.querySelector('form[action="/cart"] button[type="submit"]') || document.querySelector('button[onclick="yampiClick()"]') || document.querySelector('button[name=checkout][form=cart]');
+                      
+                      if(!getCheckoutBtn)
+                      	continue;
+                      	
+                      checkoutBtnFound = true;
+
+                      if (getCheckoutBtn.length == undefined) {
+                        var buttonValue = getCheckoutBtn.value ? getCheckoutBtn.value : getCheckoutBtn.textContent;
+                      } else {
+                        var lastBtnID = getCheckoutBtn.length - 1;
+                        var buttonValue = getCheckoutBtn[lastBtnID].value ? getCheckoutBtn[lastBtnID].value : getCheckoutBtn[lastBtnID].textContent;
+                      }
+                      var getSubBtnId = getCheckoutBtn.id;
+                      if (getSubBtnId) {
+                        getSubBtnId = getSubBtnId+'adooreiButton';
+                      } else {
+                        getSubBtnId = 'adooreiBtn';
+                      }
+
+                      if (getCheckoutBtn.length == undefined) {
+                        var inptBtn = `<button type='submit' class='`+getCheckoutBtn.className+` adoorei_check_mainBtn adoorei_elem_mainBtn' id='`+getSubBtnId+`'>`+buttonValue+`</button>`;
+                        getCheckoutBtn.insertAdjacentHTML('afterEnd', inptBtn);
+                      } else {
+                        var inptBtn = `<button type='submit' class='`+getCheckoutBtn[getCheckoutBtn.length - 1].className+` adoorei_check_mainBtn adoorei_elem_mainBtn' id='`+getSubBtnId+`'>`+buttonValue+`</button>`;
+                        getCheckoutBtn[getCheckoutBtn.length - 1].insertAdjacentHTML('afterEnd', inptBtn);
+                      }
+
+                      document.getElementById(getSubBtnId).addEventListener('click', fakeClick);
+                      
+                      let chksBtns = document.querySelectorAll('[id="'+getSubBtnId+'"]');
+                      
+                      for (let i = 0; i < chksBtns.length; i++) {chksBtns[i].addEventListener('click', fakeClick);}
+                      
+                      
+                      if(resp.skip_cart) {
+	              	if(cartPayload.item_count == 0) {
+	              		
+	              		hideAdooreiLoader();
+	              	}
+	              	else
+                        	document.getElementById(getSubBtnId).click();
+                      }
+                      else {
+                        hideAdooreiLoader();
+                      }
+                      
+                      
+                    }
+                  }
+                  
+                  if(cartPayload.item_count == 0) {
+              		hideAdooreiLoader();
+              	   }
+              	   else if(!checkoutBtnFound) {
+              	   	fakeClick(new Event(null));
+              	   }
+              	   
+              	   
+
+                  
+                  if (window.$ || window.jQuery) {
+                    var btns = $('a.btn-checkout[href="/checkout"]').not('.adoorei_elem_mainBtn');
+                    btns.hide();
+                    
+                    $('button[onclick="yampiClick()').hide();
+                  }
+                }
+            });
+
+        });
+      
+      
+    }
+  
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+  
+  function fakeClick(event) {
+        event.preventDefault();
+
+        showAdooreiLoader();
+
+        getAjax('/cart.json', function (response) {
+            var cartPayload = JSON.parse(response);
+
+            var data = {
+                shop: Shopify.shop, 
+                origin: document.location.host,
+                cart_payload: cartPayload
+            };
+
+            postAjax(adooreiCartEndpoint, JSON.stringify(data), function (response) {
+                var resp = JSON.parse(response);
+
+                window.location.href = resp.checkout_direct_url;
+            });
+        });
+    }
+  
+  
+  function getAjax(url, success) {
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        xhr.open('GET', url);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState > 3 && xhr.status==200) success(xhr.responseText);
+        };
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.send();
+        return xhr;
+    }
+
+    function postAjax(url, data, success) {
+        var params = typeof data == 'string' ? data : Object.keys(data).map(
+                function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+            ).join('&');
+
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        
+        xhr.open('POST', url);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState > 3 && xhr.status == 200) { success(xhr.responseText); }
+        };
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(params);
+
+        return xhr;
+    }
+        
+</script>

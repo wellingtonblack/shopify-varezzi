@@ -1,0 +1,675 @@
+{%- liquid 
+  assign sid = section.id
+  assign se_height = section.settings.se_height
+  assign video_url = section.settings.video_url | default:"https://www.youtube.com/watch?v=_9VUPq3SxOc" 
+  assign source = section.settings.source
+  assign image = section.settings.image -%}
+
+<div class="hero_video_se nt_se_{{sid}} {{section.settings.layout}} txt_shadow_{{section.settings.use_shadow}} se_height_{{se_height}} nt_first{% if source == '1' %} video_loading js_video{% endif %}" data-id="{{ video_url.id }}">
+  <div class="row">
+    <div class="col-12">
+      <div class="nt_img_txt oh pr middle center">
+        <div class="nt_bg_lz">
+          {%- if source == '1' %}<div class="videoplayer"></div>
+          {%- else -%}
+             <video id="video_{{sid}}" class="vid_nt vid_nt_js pa t__0 l__0 op__0 vid_bg lazyload" preload="none" playsinline data-autoplay muted loop>
+                <source src="{% if section.settings.file_name != blank %}{{ section.settings.file_name | file_url }}{% else %}https://cdn.shopify.com/s/files/1/0259/8538/4520/files/video_ex.mp4?14086{% endif %}" type="video/mp4">
+             </video>
+              <div class="pa t__0 l__0 b__0 r__0 flex column tc fl_center pe_none btn_video_ef">
+                <button type="button" class="flex fl_center al_center video-control__play"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-play" viewBox="0 0 20 40"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.6 16.8L7 1.5C5.6.3 4 .2 2.9.7 1.6 1.4.8 2.7.7 3.8v31.7c0 1.8 1.1 3.3 3.1 3.3 1.5 0 2.5-.5 3.4-1.4l16.4-15.7c1.5-1.4 1.5-3.6 0-4.9z"></path></svg></button>
+              </div>
+          {%- endif -%}
+          {%- if image != blank -%}
+          <div class="pa l__0 t__0 r__0 b__0 img_vid_js bg_rp_norepeat bg_sz_cover pe_none" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" style="background-image: url({{ image | img_url: '1x1' }})"></div>
+          {%- endif -%}
+        </div>
+        <div class="txt_content pa t__0 l__0 b__0 r__0 caption-w-{{section.settings.caption_w}} flex column shadow_wrap {{section.settings.txt_align}} pe_none z__100">
+          <div class="pa pa_txts">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                 {%- when '1' -%}<h3 class="mt__0 mg__0 lh__1">{{block.settings.title}}</h3>
+                 {%- when '2' -%}<h4 class="mt__0 mg__0 lh__1 {{block.settings.font}}">{{block.settings.title}}</h4>
+                 {%- when '4' -%}<div id="b_{{block.id}}" class="space_banner"></div>
+                 {%- when '5' -%}{{block.settings.html}}
+                 {%- when '6' -%}<div id="b_{{block.id}}" class="imtt4_space"></div>
+                 {%- else -%}
+                  {%- assign url = block.settings.btn_link | default:block.settings.btn_link2 -%}
+                  {%- if block.settings.btn_link != blank and block.settings.title -%}<a class="imtt4_btn button pe_auto round_{{block.settings.btn_round}} btn_icon_{{block.settings.btn_icon}}" href="{{block.settings.btn_link}}" target="{{block.settings.open_link}}">{{block.settings.title}}</a>{%- endif -%}
+                  {%- if block.settings.btn_link2 != blank and block.settings.title2 -%}<a class="imtt4_btn button pe_auto round_{{block.settings.btn_round}} btn_icon_{{block.settings.btn_icon}}" href="{{block.settings.btn_link2}}" target="{{block.settings.open_link2}}">{{block.settings.title2}}</a>{%- endif -%}
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- if url != blank %}<a href="{{url}}" class="pa t__0 l__0 b__0 r__0"></a>{% endif -%}
+        {%- if source == '1' %}
+        <div class="pa t__0 l__0 b__0 r__0 flex column tc fl_center pe_none">
+          <button type="button" class="flex fl_center al_center video-control__play"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-play" viewBox="0 0 20 40"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.6 16.8L7 1.5C5.6.3 4 .2 2.9.7 1.6 1.4.8 2.7.7 3.8v31.7c0 1.8 1.1 3.3 3.1 3.3 1.5 0 2.5-.5 3.4-1.4l16.4-15.7c1.5-1.4 1.5-3.6 0-4.9z"></path></svg></button>
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- render 'section_css' -%}
+{%- style -%}
+   .nt_se_{{sid}} .nt_img_txt>a:after{ background-color: {{section.settings.cl_overlay}};opacity: {{section.settings.cl_opacity | divided_by: 100.00}} }
+   .nt_se_{{sid}} .pa_txts {
+      {%- assign cap_h_pos = section.settings.cap_h_pos -%}
+      {%- assign cap_v_pos = section.settings.cap_v_pos -%}
+      top:{{cap_v_pos}}%;
+      {%- if cap_v_pos == 50 and cap_h_pos == 50 -%}width:100%;{%- endif -%}
+      {%- if cap_h_pos > 50 -%}
+       right:{{100|minus:cap_h_pos}}%;
+       transform: translate({{100|minus:cap_h_pos}}%, -{{cap_v_pos}}%);
+      {%- else -%}
+       left:{{cap_h_pos}}%;
+       transform: translate(-{{cap_h_pos}}%, -{{cap_v_pos}}%);
+      {%- endif -%}
+   }
+ {%- if se_height == 'cus_h' -%}
+      {%- if section.settings.use_custom_h == '2' -%}{% assign rto = ratio | default:3 %}{%- assign pd_top = 1 | divided_by: ratio | times: 100 -%}
+        .nt_se_{{sid}}.se_height_cus_h .nt_bg_lz{padding-top:{{ section.settings.h_mb | replace:'px','' | strip }}px}
+        @media (min-width: 768px) { .nt_se_{{sid}}.se_height_cus_h .nt_bg_lz{padding-top:{{ section.settings.h_tb | replace:'px','' | strip }}px} }
+        @media (min-width: 1025px) { .nt_se_{{sid}}.se_height_cus_h .nt_bg_lz{padding-top:{{pd_top}}% } }
+        {%- elsif section.settings.use_custom_h == '3' -%}{% assign rto = ratio | default:3 %}{%- assign pd_top = 1 | divided_by: ratio | times: 100 -%}
+        .nt_se_{{sid}}.se_height_cus_h .nt_bg_lz{padding-top:{{ section.settings.h_mb | replace:'px','' | strip }}px}
+        @media (min-width: 768px) { .nt_se_{{sid}}.se_height_cus_h .nt_bg_lz{padding-top:{{pd_top}}% } }
+        @media (min-width: 1025px) { .nt_se_{{sid}}.se_height_cus_h .nt_bg_lz{padding-top:{{pd_top}}% } }
+      {%- else -%}
+        .nt_se_{{sid}}.se_height_cus_h .nt_bg_lz{padding-top:{{ section.settings.h_mb | replace:'px','' | strip }}px}
+        @media (min-width: 768px) { .nt_se_{{sid}}.se_height_cus_h .nt_bg_lz{padding-top:{{ section.settings.h_tb | replace:'px','' | strip }}px} }
+        @media (min-width: 1025px) { .nt_se_{{sid}}.se_height_cus_h .nt_bg_lz{padding-top:{{ section.settings.h_des | replace:'px','' | strip }}px} }
+      {%- endif -%}
+  {%- endif -%}
+
+  {%- for block in section.blocks -%}{%- assign bid = block.id -%}
+      {%- case block.type -%}
+        {%- when '1' -%}
+        .nt_se_{{sid}} .nt_img_txt h3{ font-size: {{block.settings.fs_mb_text}}px;font-weight: {{block.settings.fw_text}};color: {{block.settings.color}} }
+        @media (min-width: 768px) {.nt_se_{{sid}} .nt_img_txt h3 {font-size: {{block.settings.fs_text}}px}}
+          
+        {%- when '2' -%}
+        .nt_se_{{sid}} .nt_img_txt h4{ font-size: {{block.settings.fs_mb_text}}px;font-weight: {{block.settings.fw_text}};color: {{block.settings.color}} }
+        @media (min-width: 768px) {.nt_se_{{sid}} .nt_img_txt h4 {font-size: {{block.settings.fs_text}}px}}
+
+        {%- when '4' -%}
+        #b_{{bid}} {max-width: {{block.settings.w}}px;margin: 0 auto;height: {{block.settings.h}}px;background-color: {{block.settings.color}}}
+
+        {%- when '6' -%}
+        #b_{{bid}} {height: {{block.settings.sp_mb}}px}
+        @media (min-width: 768px) {#b_{{bid}} { height:{{block.settings.sp}}px} }
+
+        {%- else -%}
+         .nt_se_{{sid}} .imtt4_btn{
+           font-weight: {{block.settings.fw_text}};min-height:{{block.settings.h}}px;
+           color: {{block.settings.cl_txt}};background-color: {{block.settings.cl_bg}};border-color: {{block.settings.cl_bd}}
+         }
+         .nt_se_{{sid}} .imtt4_btn.btn_icon_true:after {color: {{block.settings.cl_txt}} }
+      {%- endcase -%}
+  {%- endfor -%}
+
+{%- endstyle -%}
+
+{%- schema -%}
+  {
+    "name": "Hero video",
+    "class": "nt_section type_hero_video",
+    "settings": [
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Cover image",
+        "info":"Fallback when autoplaying video is not supported on mobile devices"
+      },
+      {
+        "type": "select",
+        "id": "source",
+        "label": "Source Video:",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Youtube"
+          },
+          {
+            "value": "2",
+            "label": "Upload file"
+          }
+        ]
+      },
+      {
+         "id": "video_url",
+         "type": "video_url",
+         "label": "1. Video URL",
+         "accept": ["youtube"],
+         "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+         "info": "Accepts YouTube links"
+      },
+      {
+        "type": "text",
+        "id": "file_name",
+        "label": "2. File name",
+        "info": "FIle name from uploaded files. File size is smaller 4 mb recommended"
+      },
+      {
+        "type": "paragraph",
+        "content": "—————————————————"
+      },
+      {
+        "type": "select",
+        "id": "se_height",
+        "label": "Section height",
+        "default": "full",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full screen height"
+          },
+          {
+            "value": "cus_h",
+            "label": "Custom height"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": "—————————————————"
+      },
+      {
+        "type": "select",
+        "id": "use_custom_h",
+        "default": "1",
+        "options": [
+         {
+            "value": "1",
+            "label": "All Screen"
+          },
+         {
+            "value": "2",
+            "label": "Tablet + Mobile"
+          },
+         {
+            "value": "3",
+            "label": "Mobile"
+          }
+        ],
+        "label": "Use Custom height on:"
+      },
+      {
+        "type": "text",
+        "id": "h_des",
+        "label": "Desktop Large",
+        "placeholder": "600px",
+        "default": "600px"
+      },
+      {
+        "type": "text",
+        "id": "h_tb",
+        "label": "Tablet < 1025px)",
+        "placeholder": "500px",
+        "default": "500px"
+      },
+      {
+        "type": "text",
+        "id": "h_mb",
+        "label": "Mobile (< 768px)",
+        "placeholder": "350px",
+        "default": "350px"
+      },
+      {
+         "type": "header",
+         "content": "== Caption settings"
+       },
+      {
+        "type": "select",
+        "id": "caption_w",
+        "default": "2",
+        "options": [
+         {
+            "value": "1",
+            "label": "Container"
+         },
+         {
+            "value": "2",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Caption Width"
+      },
+      {
+         "type": "range",
+         "id": "cap_v_pos",
+         "label": "Caption vertical position",
+         "default": 50,
+         "min": 0,
+         "max": 100,
+         "step": 1,
+         "unit": "%"
+      },
+      {
+         "type": "range",
+         "id": "cap_h_pos",
+         "label": "Caption horizontal position",
+         "default": 50,
+         "min": 0,
+         "max": 100,
+         "step": 1,
+         "unit": "%"
+      },
+      {
+        "type": "select",
+        "id": "txt_align",
+        "label": "Text alignment",
+        "default": "tc",
+        "options": [
+          {
+            "value": "tl",
+            "label": "Left"
+          },
+          {
+            "value": "tc",
+            "label": "Center"
+          },
+          {
+            "value": "tr",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "== Color"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_shadow",
+        "label": "Use text shadow?",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "cl_overlay",
+        "label": "Overlay",
+        "default": "#000"
+      },
+      {
+        "type": "range",
+        "id": "cl_opacity",
+        "label": "Overlay opacity",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "nt_full",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "nt_full",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank",
+        "default": "50px,,50px,",
+        "placeholder": "50px,,50px,"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank",
+        "placeholder": "50px,,50px,"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin",
+        "placeholder": "50px,,50px,"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding",
+        "placeholder": "50px,,50px,"
+      }
+    ],
+    "blocks": [
+      {
+      "type": "1",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Heading",
+            "default": "SALE OFF UP TO 70%"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color Text",
+            "default": "#fff"
+          },
+          {
+            "type": "range",
+            "id": "fs_text",
+            "min": 20,
+            "max": 70,
+            "step": 0.5,
+            "label": "Font size",
+            "unit": "px",
+            "default": 60
+          },
+          {
+            "type": "range",
+            "id": "fs_mb_text",
+            "min": 10,
+            "max": 50,
+            "step": 0.5,
+            "label": "Font size (mobile)",
+            "unit": "px",
+            "default": 30
+          },
+          {
+            "type": "range",
+            "id": "fw_text",
+            "min": 400,
+            "max": 800,
+            "step": 100,
+            "label": "Font weight",
+            "default": 700
+          }
+        ]
+      },
+      {
+      "type": "2",
+      "name": "Sub Heading",
+      "limit": 1,
+      "settings": [
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Sub Heading",
+            "default": "Summer Lookbook"
+          },
+          {
+            "type": "select",
+            "id": "font",
+            "default": "f__libre",
+            "options": [
+             {
+                "value": "f_body",
+                "label": "Body font"
+             },
+             {
+                "value": "f_heading",
+                "label": "Heading font"
+             },
+             {
+                "value": "f__libre",
+                "label": "Sub title font"
+              }
+            ],
+            "label": "Sub Heading use font:"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color Text",
+            "default": "#fff"
+          },
+          {
+            "type": "range",
+            "id": "fs_text",
+            "min": 14,
+            "max": 60,
+            "step": 0.5,
+            "label": "Font size",
+            "unit": "px",
+            "default": 18
+          },
+          {
+            "type": "range",
+            "id": "fs_mb_text",
+            "min": 10,
+            "max": 50,
+            "step": 0.5,
+            "label": "Font size (mobile)",
+            "unit": "px",
+            "default": 16
+          },
+          {
+            "type": "range",
+            "id": "fw_text",
+            "min": 400,
+            "max": 600,
+            "step": 100,
+            "label": "Font weight",
+            "default": 600
+          }
+        ]
+      },
+      {
+      "type": "3",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+          {"type": "paragraph","content": "#1 ——————————————"},
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Button label",
+            "default": "Shop Now"
+          },
+          {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button link (Optional)"
+          },
+          {
+            "type": "select",
+            "id": "open_link",
+            "options": [
+              {
+                "value": "_self",
+                "label": "Current window (_self)"
+              },
+             {
+                "value": "_blank",
+                "label": "New window (_blank)"
+              }
+            ],
+            "label": "Open link in",
+            "default": "_blank"
+          },
+          {"type": "paragraph","content": "#2 ——————————————"},
+          {
+            "type": "text",
+            "id": "title2",
+            "label": "Button label 2",
+            "default": "Shop Now 2"
+          },
+          {
+            "type": "url",
+            "id": "btn_link2",
+            "label": "Button link 2 (Optional)"
+          },
+          {
+            "type": "select",
+            "id": "open_link2",
+            "options": [
+              {
+                "value": "_self",
+                "label": "Current window (_self)"
+              },
+             {
+                "value": "_blank",
+                "label": "New window (_blank)"
+              }
+            ],
+            "label": "Open link in",
+            "default": "_blank"
+          },
+          {"type": "paragraph","content": "————————————————"},
+          {
+            "type": "checkbox",
+            "id": "btn_round",
+            "label": "Button round?",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "btn_icon",
+            "label": "Button icon?",
+            "default": false
+          },
+          {
+            "type": "color",
+            "id": "cl_txt",
+            "label": "Text color",
+            "default": "#fff"
+          },
+          {
+            "type": "color",
+            "id": "cl_bg",
+            "label": "Background color",
+            "default": "#222"
+          },
+          {
+            "type": "color",
+            "id": "cl_bd",
+            "label": "Border color",
+            "default": "#222"
+          },
+          {
+            "type": "range",
+            "id": "fw_text",
+            "min": 400,
+            "max": 600,
+            "step": 100,
+            "label": "Font weight",
+            "default": 500
+          },
+          { 
+            "type": "range",
+            "id": "h",
+            "min": 40,
+            "max": 60,
+            "step": 0.5,
+            "label": "Min height button",
+            "default": 40
+          }
+        ]
+      },
+      {
+        "type": "5",
+        "name": "HTML",
+        "settings": [
+            {
+              "type": "html",
+              "id": "html",
+              "label": "Custom HTMl",
+              "default": "<h3>Image with text overlay<\/h3>"
+            }
+          ]
+      },
+      {
+      "type": "4",
+      "name": "Space HTML",
+      "limit": 4,
+      "settings": [
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color",
+            "default": "#fff"
+          },
+          {
+            "type": "range",
+            "id": "w",
+            "min": 50,
+            "max": 150,
+            "step": 10,
+            "label": "Width",
+            "default": 140
+          },
+          {
+            "type": "range",
+            "id": "h",
+            "min": 1,
+            "max": 5,
+            "step": 0.5,
+            "label": "Height",
+            "default": 3
+          }
+        ]
+      },
+      {
+        "type": "6",
+        "name": "Space between",
+        "settings": [
+            {
+              "type": "range",
+              "id": "sp",
+              "min": 5,
+              "max": 105,
+              "step": 1,
+              "label": "Space",
+              "unit": "px",
+              "default": 10
+            },
+            {
+              "type": "range",
+              "id": "sp_mb",
+              "min": 0,
+              "max": 50,
+              "step": 0.5,
+              "label": "Space (mobile)",
+              "unit": "px",
+              "default": 10
+            }
+          ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "1. Hero video",
+        "category": "IV. Video",
+        "blocks": [
+          { "type": "1" },
+          { "type": "6" },
+          { "type": "2" },
+          { "type": "6" },
+          { "type": "3" }
+        ]
+      }
+    ]
+  }
+{% endschema %}
