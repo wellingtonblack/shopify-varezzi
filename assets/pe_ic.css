@@ -1,5 +1,5 @@
 @font-face {
-	font-family: 'Pe-icon-7-stroke';
+	font-family: 'Pe-icon-7-stroke', sans-serif;
 	font-display:auto;
 	src:url('Pe-icon-7-stroke.eot?d7yf1v');
 	src:url('Pe-icon-7-stroke.eot?#iefixd7yf1v') format('embedded-opentype'),
@@ -12,7 +12,7 @@
 
 .pegk {
 	display: inline-block;
-	font-family: 'Pe-icon-7-stroke';
+	font-family: 'Pe-icon-7-stroke', sans-serif;
 	speak: none;
 	font-style: normal;
 	font-weight: normal;

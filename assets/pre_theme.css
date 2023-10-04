@@ -6875,7 +6875,7 @@ background-position: 50% 50%;
 }
 
 .template-index .ssw-html-widget.ssw-instagram-widget .ssw-instagram-slide-title {
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   font-size: 24px;
   font-weight: 600;
   text-transform: uppercase;

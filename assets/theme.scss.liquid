@@ -37,7 +37,7 @@
       {%- if fm != fmh -%}|{{fmh | strip | replace: ' ', '+'}}:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i{% endif -%}
       {%- if fmsub != fm and fmsub != fmh -%}|{{fmsub | strip | replace: ' ', '+'}}:300,300i,400,400i,500,500i{% endif -%}
     {%- endcapture -%}
-    @import url('https://fonts.googleapis.com/css?family={{font_var}}&display=swap');
+    {% comment %} @import url('https://fonts.googleapis.com/css?family={{font_var}}&display=swap'); {% endcomment %}
     {%- assign font-stack-body = fm -%}
     {%- assign font-stack-heading = fmh -%}
     {%- assign font-stack-sub = fmsub -%}
@@ -46,18 +46,18 @@
   
   body {
       {% comment %}background-color: {{ color_primary | color_lighten: 30 }};{% endcomment %}
-      font-family: {{font-stack-body}};
+      font-family: {{font-stack-body}}, sans-serif;
       font-size: {{settings.size_bd_text}}px;
       line-height: {{settings.bd_line_height | replace:1.7,1.75}};
       color:{{settings.cl_bd_text}};
       font-weight: {{settings.fw_bd}};;
   }
   
-  .f_body,.nt_action .tcount,.lazyloaded h4.f_body { font-family: {{font-stack-body}};}
+  .f_body,.nt_action .tcount,.lazyloaded h4.f_body { font-family: {{font-stack-body}}, sans-serif;}
 
   .lazyloaded h1, .lazyloaded h2, .lazyloaded h3, .lazyloaded h4, .lazyloaded h5, .lazyloaded h6,
   .lazyloaded .f__mont,.lazyloaded .f_heading {
-        font-family: {{font-stack-heading | default:font-stack-body }};
+        font-family: {{font-stack-heading | default:font-stack-body }}, sans-serif;
   }
   h1, h2, h3, h4, h5, h6, .f__mont, .f_heading,.h3 {
     font-weight: {{settings.fw_hd}};
@@ -949,7 +949,19 @@ iframe#preview-bar-iframe {
     order: 2;
   }
 }
+
 {%- endcomment -%}
+
+{% comment %} @media(max-width: 980px) and (min-width:767px){
+  .bg_rp_norepeat {
+    background: none!important;
+  }
+  .bg_rp_norepeat picture {
+    display: block!important;
+  }
+} {% endcomment %}
+
+
 {%- unless settings.use_sale_label -%}
 #nt_search_canvas .onsale.nt_label,.product_list_widget .onsale.nt_label{display: none;}
 {%- endunless -%}
@@ -981,6 +993,18 @@ iframe#preview-bar-iframe {
     width: 100%;
     padding: 5px;
   	left: 0;
+}
+.icon_cart .tcount {
+  z-index: 0!important;
+  display: none;
+}
+#nt_backtop span{
+  background: transparent;
+  box-shadow: none;
+}
+
+.product-image {
+  min-height: 265px
 }
 
 .botaoflutuante button{
@@ -1017,21 +1041,5 @@ iframe#preview-bar-iframe {
   
   .bgbl.pt__20.pb__20.lh__1{
   	display: none;
-  }
-}
-
-@media screen and (min-width:1600px) and (max-width:1920px){ 
-  .flickity-enabled.is-draggable{
-    min-height: 500px; 
-  }
-}
-@media screen and (min-width:1280px) and (max-width:1600px){ 
-  .flickity-enabled.is-draggable{
-    min-height: 400px; 
-  }
-}
-@media screen and (min-width:950px) and (max-width:1280px){ 
-  .flickity-enabled.is-draggable{
-    min-height: 300px; 
   }
 }

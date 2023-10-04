@@ -10,10 +10,20 @@
 
   <div class="nt_se_{{sid}} {{section.settings.layout}}">
     {%- render 'section_title' -%}
-    <div class="mt__30 nt_cats_holder row fl_center equal_nt hoverz_{{section.settings.hoverz}} {{section.settings.image_ratio}} cat_space_{{section.settings.cat_space}} cat_design_{{section.settings.cat_design}}{% if section.settings.cat_layout == '2' %} nt_slider js_carousel prev_next_{{section.settings.btn_color}} btn_owl_{{section.settings.btn_owl}} dot_owl_{{section.settings.dot_owl}} dot_color_{{section.settings.dot_color}} btn_vi_{{section.settings.btn_vi}}{% endif %}"{% if section.settings.cat_layout == '2' %} data-flickity='{"imagesLoaded": false, "adaptiveHeight": true, "contain": true, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": {{section.settings.loop}},"prevNextButtons": {{section.settings.button}},"percentPosition": true,"pageDots": {{section.settings.dot}}, "autoPlay" : {% if section.settings.autoplay %}{{ section.settings.au_time | times: 1000 }}{% else %}false{% endif %}, "pauseAutoPlayOnHover" : {{section.settings.au_hover}}, "rightToLeft": {{settings.use_rtl}} }'{% endif %}>
+    <div class="mt__30 nt_cats_holder  row fl_center equal_nt hoverz_{{section.settings.hoverz}} {{section.settings.image_ratio}} cat_space_{{section.settings.cat_space}} cat_design_{{section.settings.cat_design}}{% if section.settings.cat_layout == '2' %} nt_slider js_carousel prev_next_{{section.settings.btn_color}} btn_owl_{{section.settings.btn_owl}} dot_owl_{{section.settings.dot_owl}} dot_color_{{section.settings.dot_color}} btn_vi_{{section.settings.btn_vi}}{% endif %}"{% if section.settings.cat_layout == '2' %} data-flickity='{"imagesLoaded": false, "adaptiveHeight": true, "contain": true, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": {{section.settings.loop}},"prevNextButtons": {{section.settings.button}},"percentPosition": true,"pageDots": {{section.settings.dot}}, "autoPlay" : {% if section.settings.autoplay %}{{ section.settings.au_time | times: 1000 }}{% else %}false{% endif %}, "pauseAutoPlayOnHover" : {{section.settings.au_hover}}, "rightToLeft": {{settings.use_rtl}} }'{% endif %}>
       {%- for block in section.blocks -%}{%- render 'cat_grid_item',block:block,pr_txt:pr_txt,cimg:cimg,ccol:ccol,for_i:forloop.index -%}{%- endfor -%}
     </div>
   </div>
+
+{% comment %} <script>
+setTimeout(() => {
+  $(document).mousemove(function(event){
+    $(".nt_cats_holder").css("min-height", "auto")
+  });
+},1000)
+
+</script> {% endcomment %}
+
 {%- endfor -%}
 {%- render 'section_css' -%}
 {%- schema -%}

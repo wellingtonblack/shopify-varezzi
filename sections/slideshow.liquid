@@ -8,8 +8,8 @@
   assign use_custom_h = section.settings.use_custom_h
   assign arr_blocks_img = se_blocks | where: "type", 'img' -%}
 
-<div class="black SlideshowWrapper nt_se_{{sid}} {{section.settings.layout}} se_height_{{ se_height }} nt_first">
-	<div  class="fade_flick_{{section.settings.effect}} {% if tp_blocks contains 'vid' %}slideshow_has_video {% endif %}slideshow row no-gutters equal_nt nt_slider js_carousel prev_next_{{section.settings.btn_color}} btn_owl_{{section.settings.btn_owl}} dot_owl_{{section.settings.dot_owl}} dot_color_{{section.settings.dot_color}} btn_vi_{{section.settings.btn_vi}}" data-flickity='{ "fade":0,"cellAlign": "center","imagesLoaded": 0,"lazyLoad": 0,"freeScroll": 0,"wrapAround": {{section.settings.loop}},"autoPlay" : {% if section.settings.autoplay %}{{ section.settings.au_time | times: 1000 }}{% else %}0{% endif %},"pauseAutoPlayOnHover" : {{section.settings.au_hover}}, "rightToLeft": {{settings.use_rtl}}, "prevNextButtons": {{section.settings.button}},"pageDots": {{section.settings.dot}}, "contain" : 1,"adaptiveHeight" : 1,"dragThreshold" : 5,"percentPosition": 1 }'>
+<div   class="SlideshowWrapper nt_se_{{sid}} {{section.settings.layout}} se_height_{{ se_height }} nt_first">
+	<div  style="height:450px;min-width:1440px" class="fade_flick_{{section.settings.effect}} {% if tp_blocks contains 'vid' %}slideshow_has_video {% endif %}slideshow row no-gutters equal_nt nt_slider js_carousel prev_next_{{section.settings.btn_color}} btn_owl_{{section.settings.btn_owl}} dot_owl_{{section.settings.dot_owl}} dot_color_{{section.settings.dot_color}} btn_vi_{{section.settings.btn_vi}}" data-flickity='{ "fade":0,"cellAlign": "center","imagesLoaded": 0,"lazyLoad": 0,"freeScroll": 0,"wrapAround": {{section.settings.loop}},"autoPlay" : {% if section.settings.autoplay %}{{ section.settings.au_time | times: 1000 }}{% else %}0{% endif %},"pauseAutoPlayOnHover" : {{section.settings.au_hover}}, "rightToLeft": {{settings.use_rtl}}, "prevNextButtons": {{section.settings.button}},"pageDots": {{section.settings.dot}}, "contain" : 1,"adaptiveHeight" : 1,"dragThreshold" : 5,"percentPosition": 1 }'>
 	   {%- for block in arr_blocks_img -%}
 
       {%- comment -%}
@@ -22,15 +22,15 @@
       {%- endcomment -%}
          
          {%- if block.type == 'img' -%}{%- assign image = block.settings.image %}{% assign url = block.settings.link_img1 %}{% assign open_link = block.settings.open_link %}{% assign forloop_first = forloop.first %}{% assign ani_img = block.settings.ani_img -%}
-            <div id="nt_{{block.id}}" class="col-12 slideshow__slide" {{ block.shopify_attributes }}> 
+            <div   id="nt_{{block.id}}" class="col-12 slideshow__slide" {{ block.shopify_attributes }}> 
                <div class="oh pr nt_img_txt"{% if block.settings.cl_img != blank %} style="background-color:{{block.settings.cl_img}}"{% endif %}>
 
                 {%- if image != blank -%}{%- assign ratio = image.aspect_ratio -%}{%- assign image_mb = block.settings.image_mb |default:image -%}{%- assign ratio_mb = image_mb.aspect_ratio -%}
-                  <div class="js_full_ht4 img_slider_block dek_img_slide">
-                     <div class="bg_rp_norepeat bg_sz_cover lazyload item__position {{block.settings.pos_img}} img_{{ani_img}} pa l__0 t__0 r__0 b__0" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{ratio}}" data-sizes="auto"></div>
+                  <div  width="auto"  height="auto" class="js_full_ht4 img_slider_block dek_img_slide">
+                     <div   width="auto"  height="auto"  class="bg_rp_norepeat bg_sz_cover lazyload item__position {{block.settings.pos_img}} img_{{ani_img}} pa l__0 t__0 r__0 b__0" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{ratio}}" data-sizes="auto"></div>
                   </div>
                   <div class="js_full_ht4 img_slider_block mb_img_slide">
-                     <div class="bg_rp_norepeat bg_sz_cover lazyload item__position {{block.settings.pos_img}} img_{{ani_img}} pa l__0 t__0 r__0 b__0" data-bgset="{{ image_mb | img_url: '1x1' }}" data-ratio="{{ratio_mb}}" data-sizes="auto"></div>
+                     <div  class="bg_rp_norepeat bg_sz_cover lazyload item__position {{block.settings.pos_img}} img_{{ani_img}} pa l__0 t__0 r__0 b__0" data-bgset="{{ image_mb | img_url: '1x1' }}" data-ratio="{{ratio_mb}}" data-sizes="auto"></div>
                   </div>
                 {%- else -%}
                   <div class="js_full_ht4 lazyload item__position {{block.settings.pos_img}} img_{{ani_img}}" data-bg="https://placehold.it/1170x600.png/f5f5f5/f5f5f5?text=1" style="padding-top:51.282051282051285%"></div>
@@ -112,7 +112,6 @@
 	   {%- endfor -%}
 	</div>
 </div>
-
 
   {%- render 'section_css' -%}
 

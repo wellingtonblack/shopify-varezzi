@@ -29,10 +29,10 @@
     {%- render 'section_title',url:collection.url,section_title:'mb__40' -%}
     <div class="banner_collection_wrap row no-gutters">
 
-      <div class="col-12 col-lg-6 cat_banner_img{{order_1}} fade_flick_{{section.settings.effect}} slideshow flex column equal_nt nt_slider js_carousel prev_next_{{section.settings.btn_color}} btn_owl_{{section.settings.btn_owl}} dot_owl_{{section.settings.dot_owl}} dot_color_{{section.settings.dot_color}} btn_vi_{{section.settings.btn_vi}}" data-flickity='{ "setGallerySize": 0,"fade":0,"cellAlign": "center","imagesLoaded": 0,"lazyLoad": 0,"freeScroll": 0,"wrapAround": {{section.settings.loop}},"autoPlay" : {% if section.settings.autoplay %}{{ section.settings.au_time | times: 1000 }}{% else %}0{% endif %},"pauseAutoPlayOnHover" : {{section.settings.au_hover}}, "rightToLeft": {{settings.use_rtl}}, "prevNextButtons": {{section.settings.button}},"pageDots": {{section.settings.dot}}, "contain" : 1,"adaptiveHeight" : 1,"dragThreshold" : 5,"percentPosition": 1 }'>
+      <div  class="col-12 col-lg-6 cat_banner_img{{order_1}} fade_flick_{{section.settings.effect}} slideshow flex column equal_nt nt_slider js_carousel prev_next_{{section.settings.btn_color}} btn_owl_{{section.settings.btn_owl}} dot_owl_{{section.settings.dot_owl}} dot_color_{{section.settings.dot_color}} btn_vi_{{section.settings.btn_vi}}" data-flickity='{ "setGallerySize": 0,"fade":0,"cellAlign": "center","imagesLoaded": 0,"lazyLoad": 0,"freeScroll": 0,"wrapAround": {{section.settings.loop}},"autoPlay" : {% if section.settings.autoplay %}{{ section.settings.au_time | times: 1000 }}{% else %}0{% endif %},"pauseAutoPlayOnHover" : {{section.settings.au_hover}}, "rightToLeft": {{settings.use_rtl}}, "prevNextButtons": {{section.settings.button}},"pageDots": {{section.settings.dot}}, "contain" : 1,"adaptiveHeight" : 1,"dragThreshold" : 5,"percentPosition": 1 }'>
    
             {%- for block in arr_blocks_img %}{% assign image = block.settings.image %}{% assign url = block.settings.link_img1 %}{% assign open_link = block.settings.open_link -%}
-            <div id="nt_{{block.id}}" class="w__100 slideshow__slide" {{ block.shopify_attributes }}> 
+            <div  id="nt_{{block.id}}" class="w__100 slideshow__slide" {{ block.shopify_attributes }}> 
                <div class="oh_ pr_ nt_img_txt">
 
                 {%- if image != blank -%}{%- assign ratio = image.aspect_ratio -%}{%- assign image_mb = block.settings.image_mb |default:image -%}{%- assign ratio_mb = image_mb.aspect_ratio -%}

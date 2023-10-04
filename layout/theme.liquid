@@ -1,15 +1,15 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<!-- Google Tag Manager -->
+{% comment %} <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KKN773K');</script>
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); 
+})(window,document,'script','dataLayer','GTM-KKN773K');</script> {% endcomment %}
 <!-- End Google Tag Manager -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=1  maximum-scale=1.0;" >
     <meta name="theme-color" content="{{ settings.color_primary }}">
     <meta name="format-detection" content="telephone=no">
     <link rel="canonical" href="{{ canonical_url }}">
@@ -23,9 +23,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="dns-prefetch" href="//fonts.shopifycdn.com" crossorigin>
     <link rel="dns-prefetch" href="//fonts.googleapis.com" crossorigin>
     <link rel="dns-prefetch" href="//kit-pro.fontawesome.com" crossorigin>
-    <link rel="preload" as="style" href="{{ 'theme.scss.css' | asset_url }}">
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+   
+    <script id="jqcall" src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous" ></script>
     
     {%- capture seo_title -%}
       {%- if template == 'search' and search.performed == true -%}{{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}{%- elsif template == 'search.wish' %}{{ 'general.meta.wishlist' | t }}{%- else -%}{{ page_title }}{%- endif -%}
@@ -53,12 +52,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    {{ content_for_header }}
   </head>
 <body {{class_body_theme | strip_newlines-}}>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKN773K"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- Google Tag Manager (noscript) -->
+{% comment %} <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKN773K"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> {% endcomment %}
 <!-- End Google Tag Manager (noscript) -->
 
-  
   {%- render 'lazypreload' -%}
   <div id="nt_wrapper">
     {%- render 'header',t_name:t_name -%}
@@ -67,6 +66,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   {%- render 'div_html',t_name:t_name -%}
   
-  <!-- Não remova. Checkout Yampi. -->
+  {% comment %} <!-- Não remova. Checkout Yampi. -->
 {% capture yampi_snippet_content %}{% include 'YampiSnippet' %}{% endcapture %} {% unless yampi_snippet_content contains 'Liquid error' %} {% include 'YampiSnippet' %} {% endunless %}
-<!-- Não remova. Checkout Yampi. --> </body></html>
+<!-- Não remova. Checkout Yampi. -->  {% endcomment %}
+
+
+<!-- START Widget WhastApp hospedagemwordpresspro -->
+<a href="https://api.whatsapp.com/send?phone=5511993851760&text=Olá,%20gostaria%20de%20mais%20informações." class="bt-whatsApp" target="_blank" style="right:25px; position:fixed;width:60px;height:60px;bottom:40px;z-index:100;">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxLjQxNDIxOyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIxMDAlIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnNlcmlmPSJodHRwOi8vd3d3LnNlcmlmLmNvbS8iIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cmVjdCBoZWlnaHQ9IjI0IiBpZD0iQXJ0Ym9hcmQxIiBzdHlsZT0iZmlsbDpub25lOyIgd2lkdGg9IjI0IiB4PSIwIiB5PSIwIi8+PGc+PGc+PHBhdGggZD0iTTQuMDE4LDE3LjA0OGMtMC45NiwtMS40ODQgLTEuNTE4LC0zLjI1MyAtMS41MTgsLTUuMTUxYzAsLTUuMjQzIDQuMjU3LC05LjUgOS41LC05LjVjNS4yNDMsMCA5LjUsNC4yNTcgOS41LDkuNWMwLDUuMjQzIC00LjI1Nyw5LjUgLTkuNSw5LjVjLTEuNzc3LDAgLTMuNDQsLTAuNDg5IC00Ljg2MywtMS4zMzlsLTQuNjM3LDEuNTQ1bDEuNTE4LC00LjU1NVoiIHN0eWxlPSJmaWxsOiNmM2YzZjM7Ii8+PHBhdGggZD0iTTUuNzk1LDE2LjMwNGMtMC44ODYsLTEuMjQ0IC0xLjQwNywtMi43NjUgLTEuNDA3LC00LjQwN2MwLC00LjIwMSAzLjQxMSwtNy42MTIgNy42MTIsLTcuNjEyYzQuMjAxLDAgNy42MTIsMy40MTEgNy42MTIsNy42MTJjMCw0LjIwMSAtMy40MTEsNy42MTEgLTcuNjEyLDcuNjExYy0xLjU5LDAgLTMuMDY2LC0wLjQ4OCAtNC4yODgsLTEuMzIzbC0yLjg2MiwwLjk1NGwwLjk0NSwtMi44MzVaIiBzdHlsZT0iZmlsbDojMDBhODJkOyIvPjwvZz48cGF0aCBkPSJNOS43MTQsMTMuODczYy0xLjEyNCwtMS4zNzQgLTEuODc0LC0zLjA1NiAtMi4xMDksLTQuODhjLTAuMDYzLC0wLjUwOCAwLjEwNiwtMS4wMTggMC40NjEsLTEuMzg3YzAuMzU1LC0wLjM2OSAwLjg1OCwtMC41NTggMS4zNjgsLTAuNTE1bDAuMDQ5LDAuMDA1YzAsMCAwLjU2MSwwLjE1IDAuODY4LDAuMjMzYzAuMTIyLDAuMDMzIDAuMjE5LDAuMTI0IDAuMjYsMC4yNDNjMC4xMzgsMC40MSAwLjQ2NCwxLjM3MyAwLjYxOCwxLjgyNmMwLjA1LDAuMTQ3IDAuMDA0LDAuMzEgLTAuMTE0LDAuNDFjLTAuMjMzLDAuMTk2IC0wLjYxOCwwLjUyIC0wLjg1OCwwLjcyM2MtMC4xMjksMC4xMDkgLTAuMTcsMC4yOSAtMC4xLDAuNDQzYzAuMjc5LDAuNjA4IDAuNjM1LDEuMTc2IDEuMDU3LDEuNjljMC40MzQsMC41MDIgMC45MzMsMC45NDkgMS40ODUsMS4zMjdjMC4xNCwwLjA5NSAwLjMyNSwwLjA4NSAwLjQ1NCwtMC4wMjRjMC4yNDEsLTAuMjAyIDAuNjI2LC0wLjUyNiAwLjg1OCwtMC43MjJjMC4xMTksLTAuMSAwLjI4NywtMC4xMTcgMC40MjQsLTAuMDQzYzAuNDIsMC4yMjggMS4zMTQsMC43MTIgMS42OTQsMC45MThjMC4xMTEsMC4wNiAwLjE4NSwwLjE3MiAwLjE5NiwwLjI5N2MwLjAyOSwwLjMxNyAwLjA4MywwLjg5NSAwLjA4MywwLjg5NWwtMC4wMDQsMC4wNDljLTAuMDQ0LDAuNTEgLTAuMzE1LDAuOTc0IC0wLjczOSwxLjI2MWMtMC40MjQsMC4yODggLTAuOTU1LDAuMzY4IC0xLjQ0NSwwLjIyYy0xLjc3MiwtMC41NDUgLTMuMzEzLC0xLjU4MSAtNC40NzksLTIuOTM3bC0wLjAyNywtMC4wMzJaIiBzdHlsZT0iZmlsbDojZjNmM2YzOyIvPjwvZz48L3N2Zz4=" alt="" width="60px">
+</a>
+<span id="alertWapp" style="right:30px; visibility: hidden; position:fixed; width:17px; height:17px;bottom:90px; background:red;z-index:101; font-size:11px;color:#fff;text-align:center;border-radius: 50px; font-weight:bold;line-height: normal; "> 1 </span>
+<div id="msg1" style="right: 90px; visibility: hidden; background: #fff;color: #000;position: fixed;width: 100px;bottom: 55px;font-size: 12px;line-height: 13px;padding: 3px; border-radius: 10px; border:1px solid #e2e2e2; box-shadow: 2px 2px 3px #999;z-index:100; ">Olá, posso ajudar?</div>
+<script type="text/javascript">function showIt2() {document.getElementById("msg1").style.visibility = "visible";}    setTimeout("showIt2()", 5000); function hiddenIt() {document.getElementById("msg1").style.visibility = "hidden";}setTimeout("hiddenIt()", 15000); function showIt3() {document.getElementById("msg1").style.visibility = "visible";} setTimeout("showIt3()", 25000);  msg1.onclick = function() {document.getElementById('msg1').style.visibility = "hidden"; };function alertW() { document.getElementById("alertWapp").style.visibility = "visible"; } setTimeout("alertW()", 15000); </script>
+<!-- END Widget WhastApp -->
+
+</body></html>
+
+<script>
+window.addEventListener("mousemove", () => {
+  const body = document.querySelector("body")
+  const iconCart = document.querySelector(".icon_cart .tcount")
+  if(body) {
+  body.style.overflow = "auto"
+  iconCart.style.display = "block"
+  }
+})
+</script>

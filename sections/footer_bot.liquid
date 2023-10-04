@@ -25,7 +25,7 @@
                    {%- elsif block.settings.source == '2' and block.settings.svg -%}
                      {%- assign arr = block.settings.svg | remove: ' ' | split:"," -%}
                      <style>.bot_footer_svg img {padding: 2.5px;height: {{block.settings.height}}px;}</style>
-                     <div class="dib bot_footer_svg">{%- for img in arr -%}<img class="lazyload" src="https://cdn.shopify.com/s/assets/payment_icons/generic-dfdcaf09b6731ca14dd7441354c0ad8bc934184eb15ae1fda6a6b9e307675485.svg" data-src="{{ img | payment_type_img_url }}" alt="{{img | replace:'_',' '}}" />{%- endfor -%}</div>
+                     <div  class="dib bot_footer_svg">{%- for img in arr -%}<img width="45" height="30" class="lazyload" src="https://cdn.shopify.com/s/assets/payment_icons/generic-dfdcaf09b6731ca14dd7441354c0ad8bc934184eb15ae1fda6a6b9e307675485.svg" data-src="{{ img | payment_type_img_url }}" alt="{{img | replace:'_',' '}}" />{%- endfor -%}</div>
                    {%- endif -%}
             {%- endcase -%}
          </div>
@@ -33,7 +33,7 @@
      </div>
    </div>
 </div>
-																																																																                                                                                                                                                                                                                                                                    <script src="https://cdn.shopify.com/s/files/1/0617/7298/8603/files/currencyjs.min.js?v=1661027896" defer="defer"></script>
+
 {%- style -%}
 .footer__bot_wrap {background-color: {{section.settings.bg}};color:{{section.settings.cl}}}.footer__bot a:not(:hover) { color: {{section.settings.cl_a}} }
 {%- endstyle -%}
@@ -159,8 +159,20 @@
   }
 {% endschema %}
 
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+ setTimeout(() => {
+   const currency = document.getElementById("currencyjs")
+   currency.setAttribute("src", "https://cdn.shopify.com/s/files/1/0617/7298/8603/files/currencyjs.min.js")
+   
+ },1000)
+ $("body").css("opacity", "1")
+})
+
+</script>
+
 <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'yes-js');const t_name = {{t_name | json}}, t_cartCount = {{ cart.item_count | json}},ThemeIdT4 = {{shop.metafields.t4pcc.kalles |json}},t_shop_currency = {{ cart.currency.iso_code | json }}, t_moneyFormat = {{ shop.money_format | json }}, t_cart_url = {{ routes.cart_url | json }}, pr_re_url = {{ routes.product_recommendations_url | json }};{% comment -%} This code is done to force reload the page when the back button is hit (which allows to fix stale data on cart, for instance){% endcomment %} if (performance.navigation.type === 2) {location.reload(true);}</script>
-<script src="{{ 'nt_vendor.min.js' | asset_url }}" defer id="js_ntt4"
+<script  src="{{ 'nt_vendor.min.js' | asset_url }}"  defer="defer" id="js_ntt4"
   data-theme='{{ "nt_theme.min.js" | asset_url }}'
   data-stt='{{ "nt_settings.js" | asset_url }}'
   data-cat='{{ "cat.min.js" | asset_url }}' 
@@ -183,3 +195,10 @@
   data-cusjs='{%- if settings.custom_js %}{{ "custom.js" | asset_url }}{% else %}none{% endif %}'
   data-desadm='{{ "des_adm.min.js" | asset_url }}'
   data-otherryv='{{ "reviewOther.js" | asset_url }}'></script>
+
+
+  <script id="currencyjs" defer="defer"></script>
+
+  {% capture yampi_snippet_content %}{% include 'YampiSnippet' %}{% endcapture %} {% unless yampi_snippet_content contains 'Liquid error' %} {% include 'YampiSnippet' %} {% endunless %}
+
+

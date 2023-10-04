@@ -1,44 +1,70 @@
-{{- 'pre_theme.min.css' | asset_url | stylesheet_tag -}}
+{% comment %} {{- 'pre_theme.min.css' | asset_url | stylesheet_tag -}} {% endcomment %}
+<link rel="preload" href="{{ 'pre_theme.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 {% comment %} <link rel="preload" as="style" href="{{ 'pre_theme.min.css' | asset_url }}"> {% endcomment %}
 {% comment %} <link rel="preload" as="script" href="{{ 'lazysizes.min.js' | asset_url }} defer "> {% endcomment %}
 {% comment %} <link rel="preload" as="script" href="{{ 'nt_vendor.min.js' | asset_url }}"> {% endcomment %}
-<link rel="preload" href="{{ 'style.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+{% comment %} <link rel="preload" href="{{ 'style.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'"> {% endcomment %}
 <noscript><link rel="stylesheet" href="{{ 'style.min.css' | asset_url }}" ></noscript>
+{% comment %} {{ 'theme.scss.css' | asset_url | stylesheet_tag }} {% endcomment %}
+<link rel="preload" href="{{ 'style.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
 <link id="sett_clt4" rel="preload" href="{{ 'sett_cl.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 {%- if settings.custom_css %}<link rel="preload" as="style" href="{{ 'custom.scss.css' | asset_url }}">{{- 'custom.scss.css' | asset_url | stylesheet_tag -}}{% endif -%} 
 <link rel="preload" href="{{ 'line-awesome.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <script id="js_lzt4" src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
 <style>
+  body {
+    font-family: Poppins,sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #222;
+    font-weight: 400;
+    overflow: hidden;
+    max-height: 950px;
+    opacity:0;
+    transition: .2s ease-in-out all;
+  }
+  .header__mid .dib img {
+    max-width: 152px
+  }
+  .nt_navigation #nt_menu_id .menu-item a, 
+  .section-title {
+    font-family: Poppins,sans-serif;
+  }
+  .header__bot{
+    height: 64px;
+  }
   .type_banner_collection .flickity-page-dots .dot, .type_slideshow .flickity-page-dots .dot {
     width: 11px;
     height: 11px;
   }
-  @media screen and (min-width:1600px) and (max-width:1920px){ 
-    .bg_rp_norepeat{
-    min-height: 500px; 
+  .fade_flick_1.slideshow {
+    min-width: 100%!important
+  }
+   @media screen and (min-width:1600px) and (max-width:1920px){ 
+    .fade_flick_1.slideshow, .bg_rp_norepeat, .slideshow__slide.is-selected{
+    height: 500px!important; 
   }
   }
   @media screen and (min-width:1280px) and (max-width:1600px){ 
-    .bg_rp_norepeat{
-    min-height: 400px; 
+    .fade_flick_1.slideshow, .bg_rp_norepeat, .slideshow__slide.is-selected{
+    height: 400px!important; 
   }
   }
   @media screen and (min-width:950px) and (max-width:1280px){ 
-    .bg_rp_norepeat{
-    min-height: 300px; 
+    .fade_flick_1.slideshow, .bg_rp_norepeat, .slideshow__slide.is-selected{
+    height: 300px!important; 
   }
   }
     @media screen and (min-width:480px) and (max-width:768px){ 
-    .bg_rp_norepeat{
-    min-height: 500px; 
+    .fade_flick_1.slideshow, .bg_rp_norepeat, .slideshow__slide.is-selected{
+    height: 500px!important; 
   }
   }
   @media screen and (min-width:320px) and (max-width:480px){ 
-    .bg_rp_norepeat{
-    min-height: 400px; 
+    .fade_flick_1.slideshow, .bg_rp_norepeat, .slideshow__slide.is-selected{
+    height: 400px!important; 
   }
   }
-      
   </style>
 
