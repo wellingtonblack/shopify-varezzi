@@ -83,12 +83,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </body></html>
 
 <script>
-window.addEventListener("mousemove", () => {
-  const body = document.querySelector("body")
-  const iconCart = document.querySelector(".icon_cart .tcount")
-  if(body) {
-  body.style.overflow = "auto"
-  iconCart.style.display = "block"
-  }
-})
+if(window.innerWidth < 1200) {
+  window.addEventListener("mousemove", () => {
+    const body = document.querySelector("body")
+    const iconCart = document.querySelector(".icon_cart .tcount")
+    if(body) {
+    body.style.overflow = "auto"
+    iconCart.style.display = "block"
+    }
+  })
+}
 </script>

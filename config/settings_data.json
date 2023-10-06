@@ -99,7 +99,7 @@
     "cl_se_subtt": "#222222",
     "ld_bar": "#9d9e85",
     "cl_sale": "#9d9e85",
-    "cl_new": "#109533",
+    "cl_new": "#222222",
     "cl_sold_out": "#999",
     "clpr_tt": "#222222",
     "clpr_price": "#696969",
@@ -114,7 +114,7 @@
     "atc_btn": "#222222",
     "bgatc_btn_hover": "#222222",
     "atc_btn_hover": "#fff",
-    "bgatc_pg": "#109533",
+    "bgatc_pg": "#222222",
     "atc_pg": "#fff",
     "bgatc_pg_hover": "#222222",
     "atc_pg_hover": "#fff",
@@ -658,7 +658,7 @@
             "type": "payment",
             "settings": {
               "source": "2",
-              "svg": "visa, master, elo, american_express, diners_club, boleto",
+              "svg": "visa, master, elo, american_express, diners_club",
               "height": 30
             }
           }
@@ -1234,11 +1234,11 @@
       "1581505806578": {
         "type": "slideshow",
         "blocks": {
-          "1600638756831": {
+          "1600638725722": {
             "type": "img",
             "settings": {
-              "image": "shopify:\/\/shop_images\/Desktop_-_3_4100x_cp.webp",
-              "image_mb": "shopify:\/\/shop_images\/Mobile_-_3_1080x_cp.webp",
+              "image": "shopify:\/\/shop_images\/Desktop_-_1.png",
+              "image_mb": "shopify:\/\/shop_images\/Mobile_-_1.png",
               "pos_img": "center center",
               "cl_img": "",
               "link_img1": "",
@@ -1259,8 +1259,8 @@
           "5c0b8755-e071-44a0-abce-35e63799c85a": {
             "type": "img",
             "settings": {
-              "image": "shopify:\/\/shop_images\/Desktop_-_2_3350x_cp.webp",
-              "image_mb": "shopify:\/\/shop_images\/Mobile_-_2_1080x_cp.webp",
+              "image": "shopify:\/\/shop_images\/Desktop_-_2.png",
+              "image_mb": "shopify:\/\/shop_images\/Mobile_-_2.png",
               "pos_img": "center center",
               "cl_img": "",
               "link_img1": "",
@@ -1278,11 +1278,11 @@
               "ani_txt": "none"
             }
           },
-          "1600638725722": {
+          "1600638756831": {
             "type": "img",
             "settings": {
-              "image": "shopify:\/\/shop_images\/Desktop_-_1_874014bd-11a7-43fc-b8bb-895013f3ac44_3350x_cp.webp",
-              "image_mb": "shopify:\/\/shop_images\/Mobile_-_1_f8cb9212-b7b2-420f-b063-5c1f299d2ba7_1080x_cp.webp",
+              "image": "shopify:\/\/shop_images\/Desktop_-_3.png",
+              "image_mb": "shopify:\/\/shop_images\/Mobile_-_3.png",
               "pos_img": "center center",
               "cl_img": "",
               "link_img1": "",
@@ -1302,13 +1302,13 @@
           }
         },
         "block_order": [
-          "1600638756831",
+          "1600638725722",
           "5c0b8755-e071-44a0-abce-35e63799c85a",
-          "1600638725722"
+          "1600638756831"
         ],
         "settings": {
           "se_height": "adapt_f",
-          "use_custom_h": "1",
+          "use_custom_h": "3",
           "h_des": "600px",
           "h_tb": "500px",
           "h_mb": "250px",
@@ -2351,11 +2351,11 @@
               "lb_cl": ""
             }
           },
-          "9a923b9a-c707-4e02-a32d-b674f9276105": {
+          "76b20769-7e84-4c1e-92da-ddbb75716f2d": {
             "type": "simple",
             "settings": {
-              "title": "Cintos",
-              "url": "shopify:\/\/collections\/cintos",
+              "title": "Vestuário",
+              "url": "shopify:\/\/collections\/vestuario",
               "open_link": "_self",
               "icon": "",
               "cus_cl": false,
@@ -2403,11 +2403,11 @@
               "lb_cl": ""
             }
           },
-          "76b20769-7e84-4c1e-92da-ddbb75716f2d": {
+          "9a923b9a-c707-4e02-a32d-b674f9276105": {
             "type": "simple",
             "settings": {
-              "title": "Vestuário",
-              "url": "shopify:\/\/collections\/vestuario",
+              "title": "Cintos",
+              "url": "shopify:\/\/collections\/cintos",
               "open_link": "_self",
               "icon": "",
               "cus_cl": false,
@@ -2433,11 +2433,11 @@
         "block_order": [
           "4774e984-dded-4a6b-866f-7d52eca085d5",
           "1cb9f3bf-5756-4b87-95e2-6171dbcf5933",
-          "9a923b9a-c707-4e02-a32d-b674f9276105",
+          "76b20769-7e84-4c1e-92da-ddbb75716f2d",
           "e33d9063-4c6a-48d5-830e-1d37390939ab",
           "7d88a520-3ae4-4b2c-a363-bd44732e965b",
           "8d6b6d5d-90dc-479e-9700-456d0c53b004",
-          "76b20769-7e84-4c1e-92da-ddbb75716f2d",
+          "9a923b9a-c707-4e02-a32d-b674f9276105",
           "df93f159-b9c3-4aa3-8e9d-77c0b3495d3a"
         ],
         "settings": {
@@ -2681,8 +2681,8 @@
           "db7af320-fb92-4724-9edd-a619ce02ca5e": {
             "type": "img",
             "settings": {
-              "image": "shopify:\/\/shop_images\/Desktop_-_Rodape_2700x_cp.webp",
-              "image_mb": "shopify:\/\/shop_images\/Mobile_-_Rodape_1296x_cp.webp",
+              "image": "shopify:\/\/shop_images\/Desktop_-_Rodape.png",
+              "image_mb": "shopify:\/\/shop_images\/Mobile_-_Rodape.png",
               "pos_img": "center center",
               "cl_img": "",
               "link_img1": "",
@@ -3041,14 +3041,6 @@
       "1657125762a64c2a74",
       "1622668640f1d11ec2",
       "1581530479619"
-    ],
-    "blocks": {
-      "1143683040400472741": {
-        "type": "shopify:\/\/apps\/trustoo-product-ali-reviews\/blocks\/trustoo-review-switch\/c8f15077-6475-4e86-ad06-b66038d5ba2c",
-        "disabled": false,
-        "settings": {
-        }
-      }
-    }
+    ]
   }
 }
